@@ -4904,7 +4904,7 @@ var controller_bar = core_datasetController.extend({
 
 		rectangle._xScale = me.getScaleForId(meta.xAxisID);
 		rectangle._yScale = me.getScaleForId(meta.yAxisID);
-		rectangle._datasetIndex = me.index;
+		rectangle._datasetIndex = me.department_layout;
 		rectangle._index = index;
 		rectangle._model = {
 			backgroundColor: options.backgroundColor,
@@ -4934,8 +4934,8 @@ var controller_bar = core_datasetController.extend({
 		var base = vscale.getBasePixel();
 		var horizontal = vscale.isHorizontal();
 		var ruler = me._ruler || me.getRuler();
-		var vpixels = me.calculateBarValuePixels(me.index, index, options);
-		var ipixels = me.calculateBarIndexPixels(me.index, index, ruler, options);
+		var vpixels = me.calculateBarValuePixels(me.department_layout, index, options);
+		var ipixels = me.calculateBarIndexPixels(me.department_layout, index, ruler, options);
 
 		model.horizontal = horizontal;
 		model.base = reset ? base : vpixels.base;
@@ -4971,7 +4971,7 @@ var controller_bar = core_datasetController.extend({
 				(stacked === undefined && meta.stack === undefined)) {
 				stacks.push(meta.stack);
 			}
-			if (meta.index === last) {
+			if (meta.department_layout === last) {
 				break;
 			}
 		}
@@ -5015,7 +5015,7 @@ var controller_bar = core_datasetController.extend({
 		var i, ilen;
 
 		for (i = 0, ilen = me.getMeta().data.length; i < ilen; ++i) {
-			pixels.push(scale.getPixelForValue(null, i, me.index));
+			pixels.push(scale.getPixelForValue(null, i, me.department_layout));
 		}
 
 		return {
@@ -5051,12 +5051,12 @@ var controller_bar = core_datasetController.extend({
 			for (i = 0; i < ilen; ++i) {
 				imeta = metasets[i];
 
-				if (imeta.index === datasetIndex) {
+				if (imeta.department_layout === datasetIndex) {
 					break;
 				}
 
 				if (imeta.stack === stack) {
-					stackLength = scale._parseValue(datasets[imeta.index].data[index]);
+					stackLength = scale._parseValue(datasets[imeta.department_layout].data[index]);
 					ivalue = stackLength.start === undefined ? stackLength.end : stackLength.min >= 0 && stackLength.max >= 0 ? stackLength.max : stackLength.min;
 
 					if ((value.min < 0 && ivalue < 0) || (value.max >= 0 && ivalue > 0)) {
@@ -5180,7 +5180,7 @@ core_defaults._set('bubble', {
 			},
 			label: function(item, data) {
 				var datasetLabel = data.datasets[item.datasetIndex].label || '';
-				var dataPoint = data.datasets[item.datasetIndex].data[item.index];
+				var dataPoint = data.datasets[item.datasetIndex].data[item.department_layout];
 				return datasetLabel + ': (' + item.xLabel + ', ' + item.yLabel + ', ' + dataPoint.r + ')';
 			}
 		}
@@ -5234,7 +5234,7 @@ var controller_bubble = core_datasetController.extend({
 		var yScale = me.getScaleForId(meta.yAxisID);
 		var options = me._resolveDataElementOptions(point, index);
 		var data = me.getDataset().data[index];
-		var dsIndex = me.index;
+		var dsIndex = me.department_layout;
 
 		var x = reset ? xScale.getPixelForDecimal(0.5) : xScale.getPixelForValue(typeof data === 'object' ? data : NaN, index, dsIndex);
 		var y = reset ? yScale.getBasePixel() : yScale.getPixelForValue(data, index, dsIndex);
@@ -5297,7 +5297,7 @@ var controller_bubble = core_datasetController.extend({
 			chart: chart,
 			dataIndex: index,
 			dataset: dataset,
-			datasetIndex: me.index
+			datasetIndex: me.department_layout
 		};
 
 		// In case values were cached (and thus frozen), we need to clone the values
@@ -5380,7 +5380,7 @@ core_defaults._set('doughnut', {
 		},
 
 		onClick: function(e, legendItem) {
-			var index = legendItem.index;
+			var index = legendItem.department_layout;
 			var chart = this.chart;
 			var i, ilen, meta;
 
@@ -5412,8 +5412,8 @@ core_defaults._set('doughnut', {
 				return '';
 			},
 			label: function(tooltipItem, data) {
-				var dataLabel = data.labels[tooltipItem.index];
-				var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+				var dataLabel = data.labels[tooltipItem.department_layout];
+				var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.department_layout];
 
 				if (helpers$1.isArray(dataLabel)) {
 					// show value on first line of multiline label
@@ -5475,7 +5475,7 @@ var controller_doughnut = core_datasetController.extend({
 		var arcs = meta.data;
 		var cutout = opts.cutoutPercentage / 100 || 0;
 		var circumference = opts.circumference;
-		var chartWeight = me._getRingWeight(me.index);
+		var chartWeight = me._getRingWeight(me.department_layout);
 		var maxWidth, maxHeight, i, ilen;
 
 		// If the chart's circumference isn't a full circle, calculate size as a ratio of the width/height of the arc
@@ -5516,7 +5516,7 @@ var controller_doughnut = core_datasetController.extend({
 
 		meta.total = me.calculateTotal();
 
-		me.outerRadius = chart.outerRadius - chart.radiusLength * me._getRingWeightOffset(me.index);
+		me.outerRadius = chart.outerRadius - chart.radiusLength * me._getRingWeightOffset(me.department_layout);
 		me.innerRadius = Math.max(me.outerRadius - chart.radiusLength * chartWeight, 0);
 
 		for (i = 0, ilen = arcs.length; i < ilen; ++i) {
@@ -5542,7 +5542,7 @@ var controller_doughnut = core_datasetController.extend({
 
 		helpers$1.extend(arc, {
 			// Utility
-			_datasetIndex: me.index,
+			_datasetIndex: me.department_layout,
 			_index: index,
 
 			// Desired view properties
@@ -5619,7 +5619,7 @@ var controller_doughnut = core_datasetController.extend({
 				if (chart.isDatasetVisible(i)) {
 					meta = chart.getDatasetMeta(i);
 					arcs = meta.data;
-					if (i !== me.index) {
+					if (i !== me.department_layout) {
 						controller = meta.controller;
 					}
 					break;
@@ -5703,7 +5703,7 @@ var controller_doughnut = core_datasetController.extend({
 
 core_defaults._set('horizontalBar', {
 	hover: {
-		mode: 'index',
+		mode: 'department_layout.html',
 		axis: 'y'
 	},
 
@@ -5730,7 +5730,7 @@ core_defaults._set('horizontalBar', {
 	},
 
 	tooltips: {
-		mode: 'index',
+		mode: 'department_layout.html',
 		axis: 'y'
 	}
 });
@@ -5889,7 +5889,7 @@ var controller_line = core_datasetController.extend({
 
 			// Utility
 			line._scale = me._yScale;
-			line._datasetIndex = me.index;
+			line._datasetIndex = me.department_layout;
 			// Data
 			line._children = points;
 			// Model
@@ -5918,7 +5918,7 @@ var controller_line = core_datasetController.extend({
 		var meta = me.getMeta();
 		var custom = point.custom || {};
 		var dataset = me.getDataset();
-		var datasetIndex = me.index;
+		var datasetIndex = me.department_layout;
 		var value = dataset.data[index];
 		var xScale = me._xScale;
 		var yScale = me._yScale;
@@ -5993,11 +5993,11 @@ var controller_line = core_datasetController.extend({
 
 			for (i = 0; i < ilen; ++i) {
 				dsMeta = metasets[i];
-				if (dsMeta.index === datasetIndex) {
+				if (dsMeta.department_layout === datasetIndex) {
 					break;
 				}
 
-				ds = chart.data.datasets[dsMeta.index];
+				ds = chart.data.datasets[dsMeta.department_layout];
 				if (dsMeta.type === 'line' && dsMeta.yAxisID === yScale.id) {
 					stackedRightValue = +yScale.getRightValue(ds.data[index]);
 					if (stackedRightValue < 0) {
@@ -6198,7 +6198,7 @@ core_defaults._set('polarArea', {
 		},
 
 		onClick: function(e, legendItem) {
-			var index = legendItem.index;
+			var index = legendItem.department_layout;
 			var chart = this.chart;
 			var i, ilen, meta;
 
@@ -6218,7 +6218,7 @@ core_defaults._set('polarArea', {
 				return '';
 			},
 			label: function(item, data) {
-				return data.labels[item.index] + ': ' + item.yLabel;
+				return data.labels[item.department_layout] + ': ' + item.yLabel;
 			}
 		}
 	}
@@ -6298,7 +6298,7 @@ var controller_polarArea = core_datasetController.extend({
 		chart.innerRadius = Math.max(opts.cutoutPercentage ? (chart.outerRadius / 100) * (opts.cutoutPercentage) : 1, 0);
 		chart.radiusLength = (chart.outerRadius - chart.innerRadius) / chart.getVisibleDatasetCount();
 
-		me.outerRadius = chart.outerRadius - (chart.radiusLength * me.index);
+		me.outerRadius = chart.outerRadius - (chart.radiusLength * me.department_layout);
 		me.innerRadius = me.outerRadius - chart.radiusLength;
 	},
 
@@ -6325,7 +6325,7 @@ var controller_polarArea = core_datasetController.extend({
 
 		helpers$1.extend(arc, {
 			// Utility
-			_datasetIndex: me.index,
+			_datasetIndex: me.department_layout,
 			_index: index,
 			_scale: scale,
 
@@ -6400,7 +6400,7 @@ var controller_polarArea = core_datasetController.extend({
 			chart: me.chart,
 			dataIndex: index,
 			dataset: dataset,
-			datasetIndex: me.index
+			datasetIndex: me.department_layout
 		};
 
 		return resolve$3([
@@ -6501,7 +6501,7 @@ var controller_radar = core_datasetController.extend({
 
 		// Utility
 		line._scale = scale;
-		line._datasetIndex = me.index;
+		line._datasetIndex = me.department_layout;
 		// Data
 		line._children = points;
 		line._loop = true;
@@ -6538,7 +6538,7 @@ var controller_radar = core_datasetController.extend({
 		// Utility
 		point._scale = scale;
 		point._options = options;
-		point._datasetIndex = me.index;
+		point._datasetIndex = me.department_layout;
 		point._index = index;
 
 		// Desired view properties
@@ -6999,7 +6999,7 @@ function sortByWeight(array, reverse) {
 		var v0 = reverse ? b : a;
 		var v1 = reverse ? a : b;
 		return v0.weight === v1.weight ?
-			v0.index - v1.index :
+			v0.department_layout - v1.department_layout :
 			v0.weight - v1.weight;
 	});
 }
@@ -8161,8 +8161,8 @@ core_defaults._set('global', {
 						title = item.label;
 					} else if (item.xLabel) {
 						title = item.xLabel;
-					} else if (labelCount > 0 && item.index < labelCount) {
-						title = labels[item.index];
+					} else if (labelCount > 0 && item.department_layout < labelCount) {
+						title = labels[item.department_layout];
 					}
 				}
 
@@ -8190,7 +8190,7 @@ core_defaults._set('global', {
 			},
 			labelColor: function(tooltipItem, chart) {
 				var meta = chart.getDatasetMeta(tooltipItem.datasetIndex);
-				var activeElement = meta.data[tooltipItem.index];
+				var activeElement = meta.data[tooltipItem.department_layout];
 				var view = activeElement._view;
 				return {
 					borderColor: view.borderColor,
@@ -9867,7 +9867,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 			}
 		}
 
-		result.sort(compare2Level('order', 'index'));
+		result.sort(compare2Level('order', 'department_layout.html'));
 
 		return result;
 	},
@@ -9909,7 +9909,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 		var me = this;
 		var args = {
 			meta: meta,
-			index: meta.index,
+			index: meta.department_layout,
 			easingValue: easingValue
 		};
 
@@ -12913,7 +12913,7 @@ function getOrCreateStack(stacks, stacked, meta) {
 	var key = [
 		meta.type,
 		// we have a separate stack for stack=undefined datasets when the opts.stacked is undefined
-		stacked === undefined && meta.stack === undefined ? meta.index : '',
+		stacked === undefined && meta.stack === undefined ? meta.department_layout : '',
 		meta.stack
 	].join('.');
 
@@ -12994,7 +12994,7 @@ var scale_linear = scale_linearbase.extend({
 
 		for (i = 0; i < ilen; ++i) {
 			meta = metasets[i];
-			data = datasets[meta.index].data;
+			data = datasets[meta.department_layout].data;
 			if (hasStacks) {
 				stackData(me, stacks, meta, data);
 			} else {
@@ -15173,9 +15173,9 @@ core_defaults._set('global', {
 					var style = meta.controller.getStyle(usePointStyle ? 0 : undefined);
 
 					return {
-						text: datasets[meta.index].label,
+						text: datasets[meta.department_layout].label,
 						fillStyle: style.backgroundColor,
-						hidden: !chart.isDatasetVisible(meta.index),
+						hidden: !chart.isDatasetVisible(meta.department_layout),
 						lineCap: style.borderCapStyle,
 						lineDash: style.borderDash,
 						lineDashOffset: style.borderDashOffset,
@@ -15186,7 +15186,7 @@ core_defaults._set('global', {
 						rotation: style.rotation,
 
 						// Below is extra data used for toggling the datasets
-						datasetIndex: meta.index
+						datasetIndex: meta.department_layout
 					};
 				}, this);
 			}

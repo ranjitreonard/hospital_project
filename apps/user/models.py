@@ -105,7 +105,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name + '  ' + self.last_name
 
     def user_kind(self):
-        return self.user_type + ' - ' + self.role
+        return self.get_user_type_display() + ' - ' + self.get_role_display()
 
     class Meta:
         verbose_name_plural = 'User'

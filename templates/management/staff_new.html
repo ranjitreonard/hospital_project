@@ -1,0 +1,43 @@
+{% extends 'layouts/admin_layout.html'%}
+{% load bootstrap4 %}
+{% block title %}New Staff{% endblock %}
+{% block page_title %}New Staff{% endblock %}
+{% block staff %}active{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            $("#id_user_type").change(function () {
+                var val = $(this).val();
+                if (val === 'AD'){
+                    $('#id_role').html(
+                        "<option value=''>--------</option><option value='IT'>IT</option>"
+                    );
+                }else if(val ==='MU'){
+                    $('#id_role').html(
+                        "<option value=''>--------</option><option value'HM'>Hospital Manager</option>"
+                    );
+                }else if (val === 'SU'){
+                    $('#id_role').html(
+                        "<option value=''>--------</option><option value 'HR'>Human Resource</option><option value= 'ACC'>Accountant</option>"
+                    );
+                }else if (val === 'NU') {
+                    $('#id_role').html(
+                        "<option value=''>--------</option><option value 'NRS'>Nurse</option><option value='DR'>Doctor</option><option value= 'PHM'>Pharmacy</option>"
+                    );
+                }
+
+            })
+        })
+    </script>
+{% endblock %}

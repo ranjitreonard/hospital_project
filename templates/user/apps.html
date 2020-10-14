@@ -1,4 +1,4 @@
-{% extends 'layouts/app_layout.html' %}
+{% extends 'layouts/apps_layout.html' %}
 
 {% block content %}
     <div class="container">
@@ -18,17 +18,19 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card border-left-primary">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="h4 font-weight-bold text-primary">Department</div>
-                            </div>
-                            <div>
-                                <i class="fas fa-2x fa-building"></i>
+                <div class="col">
+                    <a href="{% url 'department:dashboard' %}" class="card card-link border-left-warning">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="h4 font-weight-bold text-primary">Department</div>
+                                </div>
+                                <div>
+                                    <i class="fas fa-2x fa-building"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="col">
@@ -63,7 +65,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card border-left-primary">
+                <a href="{% url 'management:dashboard' %}" class="card card-link border-left-danger">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -74,22 +76,22 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-{#            <div class="col">#}
-{#                <div class="card border-left-primary">#}
-{#                    <div class="card-body">#}
-{#                        <div class="row no-gutters align-items-center">#}
-{#                            <div class="col mr-2">#}
-{#                                <div class="h4 font-weight-bold text-primary">Portal</div>#}
-{#                            </div>#}
-{#                            <div>#}
-{#                                <i class="fas fa-2x fa-folder-open"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
+            {#            <div class="col">#}
+            {#                <div class="card border-left-primary">#}
+            {#                    <div class="card-body">#}
+            {#                        <div class="row no-gutters align-items-center">#}
+            {#                            <div class="col mr-2">#}
+            {#                                <div class="h4 font-weight-bold text-primary">Portal</div>#}
+            {#                            </div>#}
+            {#                            <div>#}
+            {#                                <i class="fas fa-2x fa-folder-open"></i>#}
+            {#                            </div>#}
+            {#                        </div>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
 
         </div>
     </div>
