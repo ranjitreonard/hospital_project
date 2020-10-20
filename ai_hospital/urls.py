@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from apps.management import urls as manage_urls
 from apps.department import urls as department_urls
+from apps.portal import urls as portal_urls
+from apps.pharmacy import urls as pharmacy_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +29,7 @@ urlpatterns = [
     path('layout/', TemplateView.as_view(template_name='layouts/admin_layout.html'), ),
     path('administration/', include(manage_urls, namespace='management'),),
     path('department/', include(department_urls, namespace='department')),
+    path('portal/', include(portal_urls, namespace='portal')),
+    path('pharmacy/', include(pharmacy_urls, namespace='pharmacy')),
+
 ]

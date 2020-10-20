@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}{% endblock %} - Department | Ai Hospital</title>
+    <title>{% block title %}{% endblock %} - Portal | Ai Hospital</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -27,14 +27,14 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
-                <i class="fas fa-building"></i>
+                <i class="fas fa-sitemap"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Department</div>
+            <div class="sidebar-brand-text mx-3">Portal</div>
         </a>
 
         <!-- Divider -->
@@ -42,7 +42,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item {% block dash %}{% endblock %}">
-            <a class="nav-link" href="{% url 'management:dashboard' %}">
+            <a class="nav-link" href="{% url 'portal:portal' %}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -51,10 +51,10 @@
         <hr class="sidebar-divider">
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {% block ward %}{% endblock %}">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-balance-scale"></i>
-                <span>Wards</span></a>
+        <li class="nav-item {% block acc %}{% endblock %}">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-credit-card"></i>
+                <span>Payment</span></a>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -62,10 +62,10 @@
         <hr class="sidebar-divider">
 
 
-         <li class="nav-item {% block pat %}{% endblock %}">
-            <a class="nav-link" href="{% url 'department:patients' %}">
-                <i class="fas fa-user-secret"></i>
-                <span>Patients</span></a>
+         <li class="nav-item {% block hr %}{% endblock %}">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-handshake"></i>
+                <span>Income</span></a>
         </li>
 
         <!-- Divider -->
@@ -73,12 +73,21 @@
 
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {% block opd %}{% endblock %}">
+        <li class="nav-item {% block staff %}{% endblock %}">
             <a class="nav-link" href="{% url 'management:staff' %}">
-                <i class="fas fa-snowflake"></i>
-                <span>OPD</span></a>
+                <i class="fas fa-fw fa-user"></i>
+                <span>OPD Payment</span></a>
         </li>
 
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Charts -->
+         <li class="nav-item {% block mgt %}{% endblock %}">
+            <a class="nav-link" href="{% url 'management:wards' %}">
+                <i class="fas fa-fw fa-cogs"></i>
+                <span>Treatment</span></a>
+        </li>
+        <!-- Nav Item - Tables -->
 
 
         <!-- Divider -->
@@ -107,7 +116,7 @@
                 </button>
 
                 <!-- Topbar Search -->
-                 <a class="btn btn-sm btn-danger" href="{% url 'apps' %}">Apps</a>
+               <a class="btn btn-sm btn-danger" href="{% url 'apps' %}">Apps</a>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -123,9 +132,9 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
+                                        <a class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </form>

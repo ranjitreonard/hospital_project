@@ -1,0 +1,58 @@
+{% extends 'layouts/admin_layout.html'%}
+{% block page_title %}
+    {{ object.label }}
+{% endblock %}
+{% block title %}
+    Ward Details
+{% endblock %}
+{% block btn %}
+    <div align="right">
+       <form class="d-none d-sm-inline-block form-inline mr-auto" method="post" action="">
+           {% csrf_token %}
+           <div class="input-group">
+               <input autofocus required type="text" name="bed" class="form-control bg-light small border-0" placeholder="Add new bed number" aria-describedby="basic-addon2">
+               <div class="input-group-append">
+                   <button class="btn btn-warning" type="submit">
+                       <i class="fas fa-save fa-sm"></i>
+                   </button>
+               </div>
+           </div>
+            {% if errors %}<p class="text-danger small">{{ errors }}</p>{% endif %}
+       </form>
+    </div>
+
+{% endblock %}
+{% block content %}
+    <div class="row">
+    {% for bed in object.beds.all %}
+        <div class="col-4 mb-2">
+            <div class="list-group-item list-group-item-column align-items-start">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1 h5"> #{{ bed.number }} | {% if bed.status == 'Assigned' %}{{ bed.allocate.patient.full_name }}{% else %}{{ bed.status }}{% endif %}</h5>
+                        </div>
+                    </div>
+                    <div class="col-2 mt-auto">
+                        <button  class="btn btn-sm btn-warning" data-toggle="collapse" href="#bed{{ bed.id }}" role="button" aria-expanded="false" aria-controls="bed{{ bed.id }}">
+                            <i class="fa fa-sm fa-sort"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="collapse multi-collapse" id="bed{{ bed.id }}">
+                    <div class="list-group-flush mt-2">
+                        <span class="h7">History</span>
+                        {% for allocate in bed.bed_allocates.all %}
+                        <div class="list-group-item">
+                            <div>{{ ba.patient.full_name }}</div>
+                            <div class="small">From: {{ ba.admitted_at }} To: {{ ba.discharged_at }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+   {% endfor %}
+    </div>
+
+{% endblock %}

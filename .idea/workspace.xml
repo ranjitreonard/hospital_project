@@ -2,28 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ef02b74-fbf7-4f3d-908e-8d7726ad497c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/layouts/admin_layout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0002_auto_20201020_1213.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0003_auto_20201020_1215.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0004_auto_20201020_1217.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0005_auto_20201020_1231.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0006_auto_20201020_1612.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/management/migrations/0007_auto_20201020_1613.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai_hospital/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai_hospital/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ai_hospital/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ai_hospital/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/department/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/department/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/department/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/department/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/management/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/management/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/management/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/management/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/management/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/management/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/management/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/management/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/management/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/management/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/staff/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/staff/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/demo/chart-area-demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/demo/chart-area-demo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/chart.js/Chart.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/chart.js/Chart.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/chart.js/Chart.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/chart.js/Chart.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/chart.js/Chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/chart.js/Chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/chart.js/Chart.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/chart.js/Chart.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/datatables/jquery.dataTables.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/datatables/jquery.dataTables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/datatables/jquery.dataTables.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/datatables/jquery.dataTables.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/jquery/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/jquery/jquery.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/vendor/jquery/jquery.slim.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/vendor/jquery/jquery.slim.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/app_layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/apps_layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/pharmacy/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/pharmacy/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/portal/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/portal/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/portal/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/portal/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/admin_layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/admin_layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/department_layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/department_layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/management/staff_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/management/staff_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/apps.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/apps.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,12 +50,39 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/management/ward.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="36" column="67" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/management/dashboard.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="26" selection-start-column="26" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/department/patients.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/department/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="40" lean-forward="true" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+            <state relative-caret-position="170">
+              <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -64,64 +91,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/user/apps.html">
+        <entry file="file://$PROJECT_DIR$/apps/department/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="204">
+              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/management/urls.py">
+        <entry file="file://$PROJECT_DIR$/templates/department/new_patient.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/management/views.py">
+        <entry file="file://$PROJECT_DIR$/apps/management/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="57" lean-forward="true" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ai_hospital/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+            <state relative-caret-position="168">
+              <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
               <folding>
-                <element signature="e#635#667#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/department/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="64" lean-forward="true" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/department/dashboard.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -138,6 +135,18 @@
       <find>dash</find>
       <find>pass</find>
       <find>dashboard</find>
+      <find>ull</find>
+      <find>war</find>
+      <find>p</find>
+      <find>bed</find>
+      <find>href</find>
+      <find>lazy</find>
+      <find>A</find>
+      <find>gender</find>
+      <find>search</find>
+      <find>apps</find>
+      <find>gene</find>
+      <find>list</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,32 +162,53 @@
         <option value="$PROJECT_DIR$/ai_hospital/settings.py" />
         <option value="$PROJECT_DIR$/apps/staff/views.py" />
         <option value="$PROJECT_DIR$/apps/user/models.py" />
-        <option value="$PROJECT_DIR$/apps/management/forms.py" />
-        <option value="$PROJECT_DIR$/templates/management/staff_list.html" />
         <option value="$PROJECT_DIR$/templates/management/staff_new.html" />
         <option value="$PROJECT_DIR$/templates/layouts/apps_layout.html" />
         <option value="$PROJECT_DIR$/templates/department/dashboard_d.html" />
         <option value="$PROJECT_DIR$/templates/department/index.html" />
-        <option value="$PROJECT_DIR$/apps/management/views.py" />
         <option value="$PROJECT_DIR$/static/index.html" />
         <option value="$PROJECT_DIR$/templates/management/dashboard.html" />
         <option value="$PROJECT_DIR$/templates/department/department_layout.html" />
-        <option value="$PROJECT_DIR$/templates/layouts/admin_layout.html" />
-        <option value="$PROJECT_DIR$/apps/management/urls.py" />
-        <option value="$PROJECT_DIR$/apps/department/views.py" />
-        <option value="$PROJECT_DIR$/templates/user/apps.html" />
         <option value="$PROJECT_DIR$/templates/department/dashboard.html" />
-        <option value="$PROJECT_DIR$/apps/department/urls.py" />
+        <option value="$PROJECT_DIR$/templates/management/staff_details.html" />
+        <option value="$PROJECT_DIR$/apps/management/forms.py" />
+        <option value="$PROJECT_DIR$/templates/portal/dashboard.html" />
+        <option value="$PROJECT_DIR$/templates/layouts/admin_layout.html" />
+        <option value="$PROJECT_DIR$/apps/portal/views.py" />
+        <option value="$PROJECT_DIR$/templates/management/male_ward.html" />
+        <option value="$PROJECT_DIR$/apps/portal/urls.py" />
+        <option value="$PROJECT_DIR$/templates/management/wards.html" />
+        <option value="$PROJECT_DIR$/templates/layouts/pharmacy_layout.html" />
         <option value="$PROJECT_DIR$/ai_hospital/urls.py" />
+        <option value="$PROJECT_DIR$/apps/pharmacy/urls.py" />
+        <option value="$PROJECT_DIR$/apps/pharmacy/views.py" />
+        <option value="$PROJECT_DIR$/templates/pharmacy/dashboard.html" />
+        <option value="$PROJECT_DIR$/templates/user/apps.html" />
+        <option value="$PROJECT_DIR$/templates/layouts/portal_layout.html" />
+        <option value="$PROJECT_DIR$/templates/department/ward_details.html" />
+        <option value="$PROJECT_DIR$/templates/management/details.html" />
+        <option value="$PROJECT_DIR$/templates/management/staff_list.html" />
+        <option value="$PROJECT_DIR$/apps/management/urls.py" />
+        <option value="$PROJECT_DIR$/apps/management/views.py" />
+        <option value="$PROJECT_DIR$/apps/management/admin.py" />
+        <option value="$PROJECT_DIR$/templates/management/ward_details.html" />
+        <option value="$PROJECT_DIR$/templates/management/ward.html" />
+        <option value="$PROJECT_DIR$/templates/layouts/details_layout.html" />
+        <option value="$PROJECT_DIR$/apps/department/urls.py" />
+        <option value="$PROJECT_DIR$/apps/department/views.py" />
+        <option value="$PROJECT_DIR$/templates/department/new_patient.html" />
+        <option value="$PROJECT_DIR$/apps/department/forms.py" />
         <option value="$PROJECT_DIR$/templates/layouts/department_layout.html" />
+        <option value="$PROJECT_DIR$/templates/department/patients.html" />
+        <option value="$PROJECT_DIR$/apps/management/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="300" />
-    <option name="y" value="-8" />
+    <option name="x" value="676" />
+    <option name="y" value="30" />
     <option name="width" value="697" />
-    <option name="height" value="735" />
+    <option name="height" value="745" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -188,17 +218,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="ai_hospital" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ai_hospital" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ai_hospital" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ai_hospital" type="462c0819:PsiDirectoryNode" />
               <item name="ai_hospital" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -221,24 +245,19 @@
             <path>
               <item name="ai_hospital" type="b2602c69:ProjectViewProjectNode" />
               <item name="ai_hospital" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ai_hospital" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ai_hospital" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ai_hospital" type="b2602c69:ProjectViewProjectNode" />
               <item name="ai_hospital" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,16 +269,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\templates\layouts" />
-      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\templates\department" />
-      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\apps\management" />
-      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\templates\user" />
       <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\templates\department" />
       <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\ai_hospital\apps" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\templates\department" />
+      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\templates\layouts" />
+      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital\apps\management" />
+      <recent name="C:\Users\Acer\Desktop\django_projects\ai_hospital" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -312,12 +331,32 @@
       <updated>1602503538882</updated>
       <workItem from="1602503541637" duration="18223000" />
       <workItem from="1602587290182" duration="15178000" />
-      <workItem from="1602607398431" duration="22139000" />
+      <workItem from="1602607398431" duration="38542000" />
+      <workItem from="1602717998035" duration="754000" />
+      <workItem from="1602756758419" duration="7580000" />
+      <workItem from="1602764455598" duration="1452000" />
+      <workItem from="1602816939082" duration="6621000" />
+      <workItem from="1602855057536" duration="1194000" />
+      <workItem from="1603021833186" duration="13535000" />
+      <workItem from="1603106609760" duration="682000" />
+      <workItem from="1603109823117" duration="2090000" />
+      <workItem from="1603118597598" duration="3576000" />
+      <workItem from="1603124078618" duration="2000" />
+      <workItem from="1603124104977" duration="15000" />
+      <workItem from="1603191943614" duration="18344000" />
     </task>
+    <task id="LOCAL-00001" summary="done with department_layout and dashboard">
+      <created>1602673765833</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602673765833</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55540000" />
+    <option name="totallyTimeSpent" value="127788000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -329,58 +368,62 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="22" width="1382" height="754" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.118003026" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.14145234" />
       <window_info id="Structure" order="1" sideWeight="0.5008183" side_tool="true" weight="0.13993949" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27168575" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2689211" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="manage.py@ai_hospital" order="9" weight="0.34042552" />
+      <window_info active="true" anchor="bottom" id="manage.py@ai_hospital" order="9" visible="true" weight="0.33977455" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="11" visible="true" weight="0.3289689" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3289689" />
-      <window_info anchor="bottom" id="Python Console" order="13" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.3289689" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32850242" />
+      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32850242" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32967034" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.3290469" />
       <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13993949" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.14145234" />
+      <window_info id="Structure" order="1" sideWeight="0.5008183" side_tool="true" weight="0.13993949" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2707641" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2689211" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="manage.py@ai_hospital" order="9" weight="0.34042552" />
+      <window_info anchor="bottom" id="manage.py@ai_hospital" order="9" weight="0.33977455" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.3289689" />
-      <window_info anchor="bottom" id="Python Console" order="13" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.3289689" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.32850242" />
+      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32850242" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32967034" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.3290469" />
       <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="done with department_layout and dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="done with department_layout and dashboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -394,199 +437,295 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ai_hospital/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ai_hospital/asgi.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pipfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ai_hospital/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/user/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/user/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/img/undraw_posting_photo.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="41" column="85" selection-start-line="41" selection-start-column="85" selection-end-line="41" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/user/views.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/staff/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layouts/department_layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/department/dashboard_d.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ai_hospital/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="136" column="29" lean-forward="true" selection-start-line="136" selection-start-column="29" selection-end-line="136" selection-end-column="29" />
-          <folding>
-            <element signature="e#312#336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/management/staff_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layouts/department_layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="44" column="61" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/management/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/index.html" />
     <entry file="file://$PROJECT_DIR$/apps/user/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="107" column="77" selection-start-line="107" selection-start-column="77" selection-end-line="107" selection-end-column="77" />
+        <state relative-caret-position="362">
+          <caret line="111" column="29" lean-forward="true" selection-start-line="111" selection-start-column="29" selection-end-line="111" selection-end-column="29" />
           <folding>
             <element signature="e#0#75#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/management/staff_new.html">
+    <entry file="file://$PROJECT_DIR$/apps/department/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/ai_hospital-aZqc3A-n/Lib/site-packages/django/db/models/fields/related.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+        <state relative-caret-position="12495">
+          <caret line="766" column="53" selection-start-line="766" selection-start-column="53" selection-end-line="766" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/index.html">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/threading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        <state relative-caret-position="140">
+          <caret line="931" selection-start-line="931" selection-end-line="931" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layouts/apps_layout.html">
+    <entry file="file://$USER_HOME$/.virtualenvs/ai_hospital-aZqc3A-n/Lib/site-packages/django/core/checks/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6175">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="140">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layouts/department_layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="76" column="58" selection-start-line="76" selection-start-column="58" selection-end-line="76" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/management/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="17" lean-forward="true" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layouts/admin_layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="358" column="36" lean-forward="true" selection-end-line="371" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/department/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/user/apps.html">
+    <entry file="file://$USER_HOME$/.virtualenvs/ai_hospital-aZqc3A-n/Lib/site-packages/django/urls/resolvers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <caret line="334" selection-start-line="334" selection-end-line="334" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ai_hospital/urls.py">
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/phrase.rnc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+        <state relative-caret-position="140">
+          <caret line="184" column="16" selection-start-line="184" selection-start-column="16" selection-end-line="184" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/male_ward.html" />
+    <entry file="file://$PROJECT_DIR$/apps/portal/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
           <folding>
-            <element signature="e#635#667#0" expanded="true" />
+            <element signature="e#0#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/management/urls.py">
+    <entry file="file://$PROJECT_DIR$/templates/portal/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layouts/pharmacy_layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="362" selection-start-line="362" selection-end-line="362" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/pharmacy/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apps/pharmacy/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
+          <folding>
+            <element signature="e#1#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pharmacy/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layouts/portal_layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/management/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/department/ward_details.html" />
+    <entry file="file://$PROJECT_DIR$/templates/department/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/staff_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="42" lean-forward="true" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/staff_new.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/vendor/fontawesome-free/css/all.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/vendor/fontawesome-free/css/all.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layouts/apps_layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/ai_hospital-aZqc3A-n/Lib/site-packages/django/views/generic/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="153" column="6" selection-start-line="153" selection-start-column="6" selection-end-line="153" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ai_hospital/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="26" column="43" lean-forward="true" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+          <folding>
+            <element signature="e#635#667#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ai_hospital/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1445">
+          <caret line="86" column="23" selection-start-line="86" selection-start-column="23" selection-end-line="86" selection-end-column="23" />
+          <folding>
+            <element signature="e#312#336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/portal/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/ai_hospital-aZqc3A-n/Lib/site-packages/django/core/handlers/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="99" column="8" selection-start-line="99" selection-start-column="8" selection-end-line="99" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/web-forms.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/management/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/management/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/management/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/management/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="80" column="8" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user/apps.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="23" column="49" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layouts/details_layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="75" column="40" selection-start-line="75" selection-start-column="40" selection-end-line="75" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/department/patient_details.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/ai_hospital-aZqc3A-n/Lib/site-packages/django/forms/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="265" selection-start-line="265" selection-end-line="265" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/staff_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/ward_details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/new_ward.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/department/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="40" lean-forward="true" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        <state relative-caret-position="170">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -595,28 +734,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/department/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="64" lean-forward="true" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
+        <state relative-caret-position="99">
+          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layouts/department_layout.html">
+    <entry file="file://$PROJECT_DIR$/templates/department/new_patient.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+        <state relative-caret-position="238">
+          <caret line="14" column="61" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/portal/urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/management/views.py">
+    <entry file="file://$PROJECT_DIR$/templates/layouts/department_layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="57" lean-forward="true" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
+        <state relative-caret-position="180">
+          <caret line="109" column="82" selection-start-line="109" selection-start-column="82" selection-end-line="109" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layouts/admin_layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/department/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management/ward.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="36" column="67" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/department/patients.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/management/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

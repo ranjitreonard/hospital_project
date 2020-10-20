@@ -1,0 +1,56 @@
+{% extends 'layouts/department_layout.html' %}
+{% block pat %}
+    active
+{% endblock %}
+{% block title %}
+    Patients
+{% endblock %}
+{% block page_title %}
+    Patients
+{% endblock %}
+{% block btn %}
+
+
+    <a href="{% url 'department:add-patient' %} " class="btn btn-sm btn-info">
+        <i class="fas fa-plus"></i>Add patient
+    </a>
+
+{% endblock %}
+{% block content%}
+    <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Full name</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                    <td>{{ object.patient_id }}</td>
+                     <td>{{ object.full_name }}</td>
+                     <td>{{ object.gender }}</td>
+                    <td>{{ object.date_of_birth }}</td>
+                     <td>
+                         <a>
+                             <button class="btn btn-info"> <i class="fas fa-list"></i></button>
+
+                         </a>
+
+                     </td>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

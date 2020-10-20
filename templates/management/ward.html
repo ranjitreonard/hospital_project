@@ -1,0 +1,82 @@
+{% extends 'layouts/admin_layout.html' %}
+{% block page_title %}
+    Management
+{% endblock %}
+{% block title %}
+    Wards Management
+{% endblock %}
+{% block mgt %}
+    active
+{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item"><a href="#ward" data-toggle="tab" role="tab" aria-controls="ward" aria-selected="false" class="nav-link active" id="ward-tab">Wards</a></li>
+                <li class="nav-item"><a href="#bed" data-toggle="tab" role="tab" aria-controls="bed" aria-selected="false" class="nav-link " id="bed-tab">Beds</a></li>
+                <li class="nav-item"><a href="#patient" data-toggle="tab" role="tab" aria-controls="patient" aria-selected="false" class="nav-link " id="patient-tab">Patient</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="ward" role="tabpanel" aria-labelledby="ward-tab">
+                    <div class="list-group">
+                        {% for ward in wards %}
+                             <div class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ ward.label }}</h5>
+                                        {#<small class="text-muted">3 days ago</small>#}
+                                    </div>
+                                    <p class="mb-1">No of Beds: {{ ward.beds.count }}</p>
+{#                                    <p class="mb-1">No of Patients: {{ ward.patient.count }}</p>#}
+                                </div>
+                                <div class="col-md-2 mt-2">
+                                    <a href="{% url 'management:ward-details' ward.id %}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-list"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane fade " id="bed" role="tabpanel" aria-labelledby="bed-tab">
+                    List of beds
+                </div>
+                <div class="tab-pane fade " id="patient" role="tabpanel" aria-labelledby="patient-tab">
+                    List of patients
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block btn %}
+    <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#wardModal">
+        <i class="fas fa-plus"></i>Add Ward
+    </button>
+    <div class="modal fade" id="wardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New ward</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'management:ward-add' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_label">Ward name</label>
+                            <input type="text" name="label" id="id_label" class="form-control">
+                        </div>
+                    </form>
+                    <input type="submit" value="Submit" class="btn btn-sm btn-block btn-warning">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

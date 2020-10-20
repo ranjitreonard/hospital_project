@@ -25,9 +25,9 @@
                             <td>{{ object.full_name }}</td>
                             <td>{{ object.user_kind }}</td>
                             <td>
-                                <button class="btn btn-sm btn-warning">
+                                <a href="{% url 'management:staff-details'  object.id %}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-list"></i>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

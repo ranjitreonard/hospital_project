@@ -1,5 +1,6 @@
 from django.forms import *
 from apps.user.models import *
+from .models import *
 
 
 class UserForm(ModelForm):
@@ -19,3 +20,10 @@ class UserForm(ModelForm):
             pass
 
         return staff_id
+
+    class WardForm(ModelForm):
+
+
+        class Meta:
+            model = Ward
+            fields = ('label',)

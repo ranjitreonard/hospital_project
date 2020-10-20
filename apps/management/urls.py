@@ -8,4 +8,8 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('staff/', staff_list, name='staff'),
     path('staff/add/', AddStaff.as_view(), name='staff-add'),
+    path('staff/<id>/', StaffDetails.as_view(), name='staff-details'),
+    path('ward/', ManagerView.as_view(), name='wards'),
+    path('ward/add/', AddWard.as_view(), name='ward-add'),
+    path('ward/<id>/', ward_details, name='ward-details'),
 ]

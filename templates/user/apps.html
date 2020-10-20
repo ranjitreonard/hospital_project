@@ -4,17 +4,19 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="card border-left-primary">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="h4 font-weight-bold text-primary">Portal</div>
-                            </div>
-                            <div>
-                                <i class="fas fa-2x fa-folder-open"></i>
+                <div class="col">
+                    <a href="{% url 'portal:portal' %}" class="card card-link border-left-primary">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="h4 font-weight-bold text-primary">Portal</div>
+                                </div>
+                                <div>
+                                    <i class="fas fa-2x fa-building"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="col">
@@ -34,17 +36,19 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card border-left-primary">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="h4 font-weight-bold text-primary">Pharmacy</div>
-                            </div>
-                            <div>
-                                <i class="fas fa-2x fa-plus-square"></i>
+                 <div class="col">
+                    <a href="{% url 'pharmacy:dashboard' %}" class="card card-link border-left-success">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="h4 font-weight-bold text-primary">Pharmacy</div>
+                                </div>
+                                <div>
+                                    <i class="fas fa-2x fa-building"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
