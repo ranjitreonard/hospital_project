@@ -1,0 +1,219 @@
+{% extends 'layouts/department_layout.html' %}
+{% load static %}
+{% block page_title %}
+    Patient {{ object.patient_id }}
+{% endblock %}
+{% block title %}Patient {{ object.patient_id }}{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="accordion col-12" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">Personal Information
+                        <h2 class="mb-0 float-right">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="fa fa-sm fa-sort"></i>
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item disabled" aria-disabled="true">First name: {{ object.first_name }}</li>
+                                <li class="list-group-item">Last name: {{ object.last_name }}</li>
+                                <li class="list-group-item">Date of Birth: {{ object.date_of_birth }}</li>
+                                <li class="list-group-item">Gender: {{ object.gender }}</li>
+                                <li class="list-group-item">Marital status: {{ object.marital_status }}</li>
+                                <li class="list-group-item">{{ age }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">Vital Signs
+                        <h2 class="mb-0 float-right">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="fa fa-sm fa-sort"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            {% if  object.weight %}
+                                <div class="list-group">
+                                    <div class="list-group-item">Weight: {{ object.weight }}</div>
+                                    <div class="list-group-item">Weight: {{ object.bp }}</div>
+                                    <div class="list-group-item">Weight: {{ object.temperature }}</div>
+                                    <div class="list-group-item">Weight: {{ object.respiration }}</div>
+                                </div>
+                            {% else %}
+                                <form method="post" action="{% url 'department:vital-signs' object.id %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="id_weight">Weight (kg)</label>
+                                                <input required class="form-control" type="number" id="id_weight" name="weight">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="id_sys">Systolic</label>
+                                                        <input required class="form-control" type="number" id="id_sys" name="sys">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="id_dias">Diastolic</label>
+                                                        <input  required class="form-control" type="number" id="id_dias" name="dias">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="id_resp">Respiration (cpm)</label>
+                                                <input required class="form-control" type="number" id="id_resp" name="respiration">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="id_temp">Temperature (Degree Celsius)</label>
+                                                <input required class="form-control" type="number" id="id_temp" name="temperature">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-info">Submit</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">Medical History
+                        <h2 class="mb-0 float-right">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="fa fa-sm fa-sort"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="true">Add Medical Diagnosis</a>
+                                        {% for dias in object.diagnoses.all %}
+                                            <a class="nav-link " id="v-pills-dias-tab{{ dias.id }}" data-toggle="pill" href="#v-pills-dias{{ dias.id }}" role="tab" aria-controls="v-pills-dias{{ dias.id }}" aria-selected="false">{{ dias.created_at }} | {{ dias.diagnosis }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                            <form action="{% url 'department:add-diagnosis' object.id %}" method="post">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="id_complaints">Complaints</label>
+                                                    <textarea required name="complaints" class="form-control" id="id_complaints" cols="30" rows="5"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_symptoms">Symptoms</label>
+                                                    <textarea required name="symptoms" class="form-control" id="id_symptoms" cols="30" rows="5"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_onset">Onset</label>
+                                                    <input required name="onset" class="form-control" id="id_onset" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_diagnosis">Diagnosis</label>
+                                                    <textarea required name="diagnosis" id="id_diagnosis" class="form-control" cols="30" rows="5"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_treatment">Treatment</label>
+                                                    <textarea required name="treatment" class="form-control" id="id_treatment" cols="30" rows="5"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_admitted">Admit to Ward</label>
+                                                    <select required name="is_admitted" id="id_admitted" class="custom-select">
+                                                        <option value="">---------</option>
+                                                        <option value="True">Yes</option>
+                                                        <option value="False">No</option>
+                                                    </select>
+                                                </div>
+                                                <div class="from-group">
+                                                    <button class="btn btn-info" type="submit">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {% for dias in object.diagnoses.all %}
+                                            <div class="tab-pane fade" id="v-pills-dias{{ dias.id }}" role="tabpanel" aria-labelledby="v-pills-dias-tab{{ dias.id }}">
+                                                <div class="list-group">
+                                                    <div class="list-group-item">
+                                                        Complaints: {{ dias.complaints }}
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        Onset: {{ dias.onset }}
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="row">
+                                                            <div class="col">Treatments</div>
+                                                            <div class="col" align=" right">
+                                                                <a href="#treat{{ dias.id }}" role="button" aria-controls="treat{{ dias.id }}" aria-expanded="false" data-toggle="collapse" class="btn-sm btn-info">
+                                                                    <i class="fa fa-sort"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="collapse multi-collapse" id="treat{{ dias.id }}">
+                                                            {% for treatment in dias.treatments.all %}
+                                                                <div class="list-group-item">
+                                                                {{ treatment.treatment }}
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">Notes</div>
+                <div class="card-body">
+                    <form action="">
+                        {% csrf_token %}
+                        <textarea name="note" id="id_note" class="form-control" cols="5" rows="5" placeholder="Type notes here">
+                        </textarea>
+                        <button type="submit" class="btn btn-info mt-2" >Save</button>
+                    </form>
+                    <hr>
+                    <div class="list-group">
+                        {% for note in object.notes.all %}
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    {#                                <h5 class="mb-1">List group item heading</h5>#}
+                                    <small>3 days ago</small>
+                                </div>
+                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                <small>Ranjit Reonard</small>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{#{% block js %}#}
+{#<script src="{% static 'js/stretchy.js' %}" data-filter="#id_treatment" async></script>#}
+{#{% endblock %}#}

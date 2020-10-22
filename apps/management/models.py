@@ -102,6 +102,7 @@ class Patient(models.Model):
     respiration = models.CharField(max_length=100, null=True, blank=True)
     temperature = models.CharField(max_length=100,null=True, blank=True)
     diagnoses = models.ManyToManyField('MedicalDiagnosis', related_name='patient_diagnoses', blank=True)
+    notes = models.ManyToManyField('department.Note',related_name='patient_notes',blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='patients', blank=True, null=True)
 
@@ -126,12 +127,15 @@ class MedicalDiagnosis(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='diagnoses',
                                    blank=True, null=True)
+    complaints = models.CharField(blank=True, null=True, max_length=2000)
+    symptoms = models.CharField(blank=True, null=True, max_length=2000)
 
     def __str__(self):
         return self.diagnosis
 
     class Meta:
         db_table = 'medical_diagnosis'
+        ordering = ('-created_at',)
 
 
 TREATMENT_STATUS = {
@@ -154,7 +158,7 @@ class Treatment(models.Model):
 
 
     def __str__(self):
-        return self.treatment + ' - ' + self.prescription
+        return f"{self.treatment} -  {self.prescription}"
 
     class Meta:
         db_table = 'treatment'

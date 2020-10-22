@@ -1,0 +1,40 @@
+{% extends 'layouts/department_layout.html' %}
+{% block opd %}active{% endblock %}
+{% block page_title %}Out Patients Department{%endblock  %}
+{% block title %}OPD{% endblock %}
+{% block content %}
+     <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Full name</th>
+                        <th>Gender</th>
+                        <th>Date of Birth</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                    <td>{{ object.patient_id }}</td>
+                     <td>{{ object.full_name }}</td>
+                     <td>{{ object.gender }}</td>
+                    <td>{{ object.date_of_birth }}</td>
+                     <td>
+                         <a href="{% url 'department:patient-details' object.id%}" class="btn btn-info">
+                             <i class="fas fa-list"></i>
+                         </a>
+                     </td>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
