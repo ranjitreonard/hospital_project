@@ -62,9 +62,8 @@ def generate():
     LENGTH = 10
     pat_id = ""
     for i in range(LENGTH):
-        pat_id +=  FROM[randrange(0, len(FROM))]
+        pat_id += FROM[randrange(0, len(FROM))]
     return f'PT{ pat_id}/{timezone.now().year}'
-
 
 
 GENDER = {
@@ -106,7 +105,6 @@ class Patient(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='patients', blank=True, null=True)
 
-
     def __str__(self):
         return self.patient_id
 
@@ -117,9 +115,8 @@ class Patient(models.Model):
         db_table = 'patient'
 
 
-
 class MedicalDiagnosis(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL,related_name='diagnosis_patient', blank=True, null=True)
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, related_name='diagnosis_patient', blank=True, null=True)
     diagnosis = models.CharField(max_length=100, blank=True, null=True)
     is_admitted = models.BooleanField(blank=True, null=True)
     onset = models.CharField(max_length=100, blank=True, null=True)
@@ -142,8 +139,8 @@ TREATMENT_STATUS = {
     ('Pending', 'Pending'),
     ('Canceled', 'Canceled'),
     ('Completed', 'Completed')
-
 }
+
 
 class Treatment(models.Model):
     diagnosis = models.ForeignKey(MedicalDiagnosis, on_delete=models.SET_NULL, related_name='treatment_diagnosis', blank=True, null=True)
@@ -156,11 +153,11 @@ class Treatment(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,related_name='treatment', blank=True, null=True)
 
-
     def __str__(self):
         return f"{self.treatment} -  {self.prescription}"
 
     class Meta:
         db_table = 'treatment'
+        ordering = ('-created_at',)
 
 

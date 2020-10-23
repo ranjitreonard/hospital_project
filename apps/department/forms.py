@@ -3,6 +3,7 @@ from apps.management import models
 from apps.management.models import Ward
 
 
+
 class NewPatientForm(ModelForm):
     class Meta:
         model = models.Patient

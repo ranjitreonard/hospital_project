@@ -40,15 +40,16 @@ class AddStaff(LoginRequiredMixin, CreateView):
 
         return valid
 
+
 class StaffDetails(LoginRequiredMixin, DetailView):
     template_name = 'management/staff_details.html'
     model = User
     queryset = User.objects.all()
     pk_url_kwarg = 'id'
 
+
 class ManagerView(LoginRequiredMixin, TemplateView):
     template_name= 'management/ward.html'
-
 
     def get_context_data(self, **kwargs):
        context = super(ManagerView, self).get_context_data(**kwargs)

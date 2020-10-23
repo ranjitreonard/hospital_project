@@ -137,6 +137,10 @@
                                                     <textarea required name="treatment" class="form-control" id="id_treatment" cols="30" rows="5"></textarea>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="id_prescription">Prescription</label>
+                                                    <textarea name="prescription" class="form-control" id="id_prescription" cols="30" rows="5"></textarea>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="id_admitted">Admit to Ward</label>
                                                     <select required name="is_admitted" id="id_admitted" class="custom-select">
                                                         <option value="">---------</option>
@@ -159,20 +163,106 @@
                                                         Onset: {{ dias.onset }}
                                                     </div>
                                                     <div class="list-group-item">
-                                                        <div class="row">
+                                                        <div class="row pb-2">
                                                             <div class="col">Treatments</div>
-                                                            <div class="col" align=" right">
-                                                                <a href="#treat{{ dias.id }}" role="button" aria-controls="treat{{ dias.id }}" aria-expanded="false" data-toggle="collapse" class="btn-sm btn-info">
+                                                            <div class="col" align="right">
+                                                                <a href="#treat{{ dias.id }}" role="button" aria-controls="treat{{ dias.id }}" aria-expanded="false" data-toggle="collapse" class="btn btn-sm btn-info">
                                                                     <i class="fa fa-sort"></i>
                                                                 </a>
+                                                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentModal{{ dias.id }}">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal fade" id="treatmentModal{{ dias.id }}" tabindex="-1" aria-labelledby="#treatmentModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="treatmentModalLabel">{{ dias.diagnosis }} Treatment</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form action="{% url 'department:add-treatment' patient_id=object.id diagnosis_id=dias.id %}" method="post">
+                                                                            {% csrf_token %}
+                                                                            <div class="modal-body">
+                                                                                <div class="form-group">
+                                                                                    <label for="id_treatment">Treatment</label>
+                                                                                    <textarea required name="treatment" id="id_treat" cols="30" rows="3" class="form-control"></textarea>
+
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="id_prescription">Prescription</label>
+                                                                                    <textarea name="prescription" id="id_prescribe" cols="30" rows="5" class="form-control"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="collapse multi-collapse" id="treat{{ dias.id }}">
-                                                            {% for treatment in dias.treatments.all %}
-                                                                <div class="list-group-item">
-                                                                {{ treatment.treatment }}
-                                                                </div>
-                                                            {% endfor %}
+                                                            <div class="list-group" >
+                                                                {% for treatment in dias.treatments.all %}
+                                                                    <div class="list-group-item">
+                                                                        <div class="row">
+                                                                            <div class="col">{{ treatment.treatment }}</div>
+                                                                            <div class="col" align="right">
+                                                                                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#treatsModal{{ treatment.id }}">
+                                                                                    <i class="fa fa-list"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                                <div class="modal fade" id="treatsModal{{ treatment.id }}" tabindex="-1" aria-labelledby="treatsModalLabelModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title" id="treatsModalLabel">{{ treatment.treatment }}</h5>
+                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+                                                                                                <div class="list-group-flush">
+                                                                                                    <div class="list-group-item">Prescription: {{ treatment.prescription }}</div>
+                                                                                                    <div class="list-group-item">Status: {{ treatment.status }}</div>
+                                                                                                    <div class="list-group-item">Created Date: {{ treatment.created_at }}</div>
+                                                                                                    <div class="list-group-item">Time Treated: {{ treatment.time_treated }}</div>
+                                                                                                    <div class="list-group-item">Date Treated: {{ treatment.date_treated }}</div>
+                                                                                                </div>
+                                                                                                {% if treatment.status == 'Pending' %}
+                                                                                                    <hr>
+                                                                                                    <form action="{% url 'department:complete-treatment'  treatment_id=treatment.id patient_id=patient.id %}" method="post">
+                                                                                                        {% csrf_token %}
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <div class="form-group">
+                                                                                                                    <label for="id_time">Time Completed</label>
+                                                                                                                    <input required type="time" name="time_completed" id="id_time" class="form-control">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col">
+                                                                                                                <div class="form-group">
+                                                                                                                    <label for="id_date">Date Completed</label>
+                                                                                                                    <input required type="date" name="date_completed" id="id_date" class="form-control">
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <button type="submit" class="btn btn-block btn-success">Complete</button>
+                                                                                                    </form>
+                                                                                                    <hr>
+                                                                                                    <a href="{% url 'department:cancel-treatment' treatment_id=treatment.id patient_id=patient.id %}" class="btn btn-block btn-danger">Cancel</a>
+                                                                                                {% endif %}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,11 +280,10 @@
             <div class="card">
                 <div class="card-header">Notes</div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{% url 'department:add-note' object.id %}" method="post">
                         {% csrf_token %}
-                        <textarea name="note" id="id_note" class="form-control" cols="5" rows="5" placeholder="Type notes here">
-                        </textarea>
-                        <button type="submit" class="btn btn-info mt-2" >Save</button>
+                        <textarea name="note" id="id_note" class="form-control" cols="5" rows="5" placeholder="Type notes here"></textarea>
+                        <button type="submit" class="btn btn-info mt-2">Save</button>
                     </form>
                     <hr>
                     <div class="list-group">
@@ -202,10 +291,10 @@
                             <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     {#                                <h5 class="mb-1">List group item heading</h5>#}
-                                    <small>3 days ago</small>
+                                    <small>{{ note.created_at }}</small>
                                 </div>
-                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                <small>Ranjit Reonard</small>
+                                <p class="mb-1">{{ note }}</p>
+                                <small>{{ note.created_by.full_name }}</small>
                             </a>
                         {% endfor %}
                     </div>

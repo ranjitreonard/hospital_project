@@ -10,5 +10,9 @@ urlpatterns = [
     path('patient/<id>/', PatientDetails.as_view(), name='patient-details'),
     path('patient/vital-signs/<id>/', vital_signs, name='vital-signs'),
     path('opd/', OPDPatients.as_view(), name='opd'),
-    path('patient/diagnosis/add/<id>/', PatientDiagnosis.as_view(), name='add-diagnosis')
+    path('patient/diagnosis/add/<id>/', PatientDiagnosis.as_view(), name='add-diagnosis'),
+    path('notes/add/<id>/', patient_note, name='add-note'),
+    path('patient/treatment/add/<patient_id>/<diagnosis_id>/', add_treatment, name='add-treatment'),
+    path('patient/treatment/complete/<treatment_id>/<patient_id>/', complete_treatment, name='complete-treatment'),
+    path('patient/treatment/cancel/<treatment_id>/<patient_id>',CancelTreatment.as_view(), name='cancel-treatment'),
 ]
