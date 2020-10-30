@@ -6,7 +6,8 @@ from django.utils import timezone
 
 class Ward(models.Model):
     label = models.CharField(max_length=100, blank=True, null=True)
-    incharge = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='ward_incharge', blank=True, null=True)
+    incharge = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='ward_incharge',
+                                 blank=True, null=True)
     beds = models.ManyToManyField('Bed', related_name='ward_beds', blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='wards', blank=True, null=True)
@@ -25,7 +26,6 @@ BED_STATUS = {
 }
 
 
-
 class Bed(models.Model):
     number = models.CharField(max_length=10, blank=True, null=True)
     ward = models.ForeignKey(Ward, on_delete=models.SET_NULL, related_name='bed_ward', blank=True, null=True)
@@ -40,13 +40,16 @@ class Bed(models.Model):
 
     class Meta:
         db_table = 'bed'
+        ordering = ('number',)
 
 
 class BedAllocate(models.Model):
     bed = models.ForeignKey(Bed, on_delete=models.SET_NULL, related_name='bed_allocate_bed', blank=True, null=True)
     patient = models.ForeignKey('Patient', on_delete=models.SET_NULL, related_name='bed_allocate_patient', blank=True, null=True)
-    admitted_at = models.DateField(blank=True, null=True)
-    discharged_at = models.DateField(blank=True, null=True)
+    date_admitted = models.DateField(blank=True, null=True)
+    time_admitted = models.TimeField(blank=True, null=True)
+    date_discharged = models.DateField(blank=True, null=True)
+    time_discharged = models.TimeField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name= 'bed_allocates', blank=True, null=True)
 
@@ -94,8 +97,11 @@ class Patient(models.Model):
     gender = models.CharField(max_length=100, blank=True, null=True, choices=GENDER)
     marital_status = models.CharField(max_length=100, blank=True, null=True, choices=MARITAL)
     date_of_birth = models.DateField(blank=True, null=True)
-    admitted_at = models.DateTimeField(blank=True, null=True)
-    discharge_at = models.DateTimeField(blank=True,null=True)
+    date_admitted = models.DateField(blank=True, null=True)
+    time_admitted = models.TimeField(blank=True, null=True)
+    date_discharged = models.DateField(blank=True, null=True)
+    time_discharged = models.TimeField(blank=True, null=True)
+    bed = models.ForeignKey(Bed, on_delete=models.SET_NULL,related_name='patient_bed', blank=True, null=True)
     weight = models.CharField(max_length=10, null=True, blank=True)
     bp = models.CharField(max_length=100, null=True, blank=True)
     respiration = models.CharField(max_length=100, null=True, blank=True)

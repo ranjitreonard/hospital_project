@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, RedirectView, TemplateView
 
 from apps.management.forms import UserForm
+from apps.portal.models import DefaultBill
 from apps.user.models import User
 from .models import *
 
@@ -56,6 +57,7 @@ class ManagerView(LoginRequiredMixin, TemplateView):
        context['wards'] = Ward.objects.all()
        context['beds'] = Bed.objects.all()
        context['patients'] = Patient.objects.all()
+       context['bills'] = DefaultBill.objects.all()
        return context
 
 
@@ -70,6 +72,7 @@ class AddWard(LoginRequiredMixin, RedirectView):
             created_by=request.user
         )
         return super(AddWard, self).post(self, request, *args, **kwargs)
+
 
 @login_required()
 def ward_details(request, id):
@@ -104,4 +107,54 @@ def ward_details(request, id):
 
             return HttpResponseRedirect(reverse_lazy('management:ward-details', kwargs={'id':ward.id}))
 
-    return render(request=request,template_name='management/ward_details.html', context=context)
+    return render(request=request, template_name='management/ward_details.html', context=context)
+
+
+class AddBill(LoginRequiredMixin, RedirectView):
+    url = reverse_lazy('management:wards')
+
+    def post(self, request, *args, **kwargs):
+        bill_type = request.POST.get('bill_type')
+        service = request.POST.get('service')
+        amount = request.POST.get('amount')
+
+        new_default_bill = DefaultBill.objects.create(
+            bill_type=bill_type,
+            service=service if service else '',
+            amount=amount,
+            created_by=self.request.user
+        )
+
+        return super(AddBill, self).post(self,request,*args, **kwargs)
+
+
+class DeleteBill(LoginRequiredMixin, RedirectView):
+    url = reverse_lazy('management:wards')
+
+    def post(self,request, *args, **kwargs):
+        bill_id = kwargs.get('bill_id')
+
+        bill = DefaultBill.objects.get(id=bill_id)
+
+        bill.delete()
+
+        return super(DeleteBill, self).post(self, request, *args, **kwargs)
+
+
+class UpdateBill(LoginRequiredMixin, RedirectView):
+    url = reverse_lazy('management:wards')
+
+    def post(self, request, *args, **kwargs):
+        bill_id = kwargs.get('bill_id')
+        amount = request.POST.get('amount')
+        service = request.POST.get('service')
+        bill_type = request.POST.get('bill_type')
+
+        bill = DefaultBill.objects.get(id=bill_id)
+
+        bill.amount = amount
+        bill.service = service
+        bill.bill_type = bill_type
+        bill.save()
+
+        return super(UpdateBill, self). post(self, request, *args, **kwargs)

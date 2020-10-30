@@ -15,6 +15,7 @@
                 <li class="nav-item"><a href="#ward" data-toggle="tab" role="tab" aria-controls="ward" aria-selected="false" class="nav-link active" id="ward-tab">Wards</a></li>
                 <li class="nav-item"><a href="#bed" data-toggle="tab" role="tab" aria-controls="bed" aria-selected="false" class="nav-link " id="bed-tab">Beds</a></li>
                 <li class="nav-item"><a href="#patient" data-toggle="tab" role="tab" aria-controls="patient" aria-selected="false" class="nav-link " id="patient-tab">Patient</a></li>
+                <li class="nav-item"><a href="#bill" data-toggle="tab" role="tab" aria-controls="bill" aria-selected="false" class="nav-link " id="bill-tab">Bill Charges</a></li>
             </ul>
         </div>
         <div class="card-body">
@@ -22,24 +23,24 @@
                 <div class="tab-pane fade show active" id="ward" role="tabpanel" aria-labelledby="ward-tab">
                     <div class="list-group">
                         {% for ward in wards %}
-                             <div class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{ ward.label }}</h5>
-                                        {#<small class="text-muted">3 days ago</small>#}
+                            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{ ward.label }}</h5>
+                                            {#<small class="text-muted">3 days ago</small>#}
+                                        </div>
+                                        <p class="mb-1">No of Beds: {{ ward.beds.count }}</p>
+                                        {#                                    <p class="mb-1">No of Patients: {{ ward.patient.count }}</p>#}
                                     </div>
-                                    <p class="mb-1">No of Beds: {{ ward.beds.count }}</p>
-{#                                    <p class="mb-1">No of Patients: {{ ward.patient.count }}</p>#}
+                                    <div class="col-md-2 mt-2">
+                                        <a href="{% url 'management:ward-details' ward.id %}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-list"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 mt-2">
-                                    <a href="{% url 'management:ward-details' ward.id %}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-list"></i>
-                                    </a>
-                                </div>
-                            </div>
 
-                        </div>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -49,14 +50,129 @@
                 <div class="tab-pane fade " id="patient" role="tabpanel" aria-labelledby="patient-tab">
                     List of patients
                 </div>
+                <div class="tab-pane fade " id="bill" role="tabpanel" aria-labelledby="bill-tab">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th>Bill Type</th>
+                                <th>Service</th>
+                                <th>Amount (GHS)</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for bill in bills %}
+                                <tr>
+                                    <td>{{ bill.get_bill_type_display }}</td>
+                                    <td>{{ bill.service }}</td>
+                                    <td>{{ bill.amount }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#actionModal{{ bill.id }}">
+                                            <i class="fa fa-pen"></i> Action
+                                        </button>
+                                        <div class="modal fade" id="actionModal{{ bill.id }}" tabindex="-1" role="dialog" aria-labelledby="actionModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="actionModalLongTitle">{{ bill.get_bill_type_display }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{% url 'management:bill-update' bill.id %}" method="post">
+                                                            {% csrf_token %}
+                                                            <div class="form-group">
+                                                                <label for="id_ebill_type">Bill Type</label>
+                                                                <select name="" id="id_ebill_type" class="custom-select">
+                                                                    <option value="">---------</option>
+                                                                    <option value="WB" {% if bill.bill_type == 'WB' %}selected{% endif %}>Ward Bills</option>
+                                                                    <option value="LB" {% if bill.bill_type == 'LB' %}selected{% endif %}>Lab Bills</option>
+                                                                    <option value="PB" {% if bill.bill_type == 'PB' %}selected{% endif %}>Procedure Bills</option>
+                                                                    <option value="CB" {% if bill.bill_type == 'CB' %}selected{% endif %}>Card Bills</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for=""></label>
+                                                                <input type="text" value="{{ bill.service }}" name="service" id="id_eservice" class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="id_eamount">Amount</label>
+                                                                <input type="text" value="{{ bill.amount }}" name="amount" id="id_eamount" class="form-control">
+                                                            </div>
+                                                            <button type="submit" class="btn btn-outline-success">Update</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form action="{% url 'management:bill-delete' bill.id %}" method="post" >
+                                                            {% csrf_token %}
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+
+                                                        {#                                                        <button type="button" class="btn btn-primary">Save</button>#}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 {% block btn %}
-    <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#wardModal">
-        <i class="fas fa-plus"></i>Add Ward
-    </button>
+    <div>
+        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#wardModal">
+            <i class="fas fa-plus"></i>Add Ward
+        </button>
+        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#billModal">
+            <i class="fa fa-plus"></i>Add Bill
+        </button>
+
+    </div>
+    <div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="billModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="billModalLabel">New Bill</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'management:bill-add' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_bill_type">Bill Type</label>
+                            <select required name="bill_type" id="id_bill_type" class="custom-select">
+                                <option value="">---------</option>
+                                <option value="WB">Ward Bills</option>
+                                <option value="LB">Lab Bills</option>
+                                <option value="PB">Procedure Bills</option>
+                                <option value="CB">Card Bills</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_service">Service</label>
+                            <input type="text" name="service" id="id_service" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_amount">Amount (GHS)</label>
+                            <input required type="number" name="amount" id="id_amount" class="form-control">
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-sm btn-block btn-warning">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="wardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -79,4 +195,39 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            $('#id_bill_type').change(function () {
+                var val = $(this).val();
+                if(val === 'WB' || val === 'CB'){
+                    $("#id_service").hide();
+                    $("#id_service").prop('value', '')
+                }else if (val === "LB" || val === "PB"){
+                    $("#id_service").show();
+                }else{
+                    $("#id_service").show();
+                }
+            })
+        });
+        if(document.getElementById('id_ebill_type') === 'WB' || document.getElementById('id_ebill_type') === 'CB'){
+            $("#id_eservice").hide();
+        }else if(document.getElementById('id_ebill_type') === 'LB' || document.getElementById('id_ebill_type') === 'PB'){
+             $("#id_eservice").show();
+        }
+         $(document).ready(function() {
+            $('#id_ebill_type').change(function () {
+                var val = $(this).val();
+                if(val === 'WB' || val === 'CB'){
+                    $("#id_eservice").hide();
+                    {#$("#id_eservice").prop('value', '')#}
+                }else if (val === "LB" || val === "PB"){
+                    $("#id_eservice").show();
+                }else{
+                    $("#id_eservice").show();
+                }
+            })
+        })
+    </script>
 {% endblock %}

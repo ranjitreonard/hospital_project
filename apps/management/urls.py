@@ -12,4 +12,7 @@ urlpatterns = [
     path('ward/', ManagerView.as_view(), name='wards'),
     path('ward/add/', AddWard.as_view(), name='ward-add'),
     path('ward/<id>/', ward_details, name='ward-details'),
+    path('bill/add/', AddBill.as_view(), name='bill-add'),
+    path('bill/delete/<bill_id>/', DeleteBill.as_view(), name='bill-delete'),
+    path('bill/update/<bill_id>/', UpdateBill.as_view(), name='bill-update')
 ]

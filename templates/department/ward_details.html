@@ -1,0 +1,90 @@
+{% extends 'layouts/department_layout.html'%}
+{% block page_title %}
+    {{ object.label }}
+{% endblock %}
+{% block title %}
+    Ward Details
+{% endblock %}
+{% block content %}
+    {% if error %}
+        <small class="text-danger">{{ error }}</small>
+    {% endif %}
+    <div class="row">
+        {% for bed in object.beds.all %}
+            <div class="col-4 mb-2">
+                <div class="list-group-item list-group-item-column align-items-start">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1 h5"> #{{ bed.number }} | {% if bed.status == 'Assigned' %}
+                                    <a href="{% url 'department:patient-details' bed.allocate.patient.id %}">{{ bed.allocate.patient.full_name }}</a>{% else %}{{ bed.status }}{% endif %}</h5>
+                            </div>
+                        </div>
+                        <div class="col-4 mt-auto">
+                            <button  class="btn btn-sm btn-info" data-toggle="collapse" href="#bed{{ bed.id }}" role="button" aria-expanded="false" aria-controls="bed{{ bed.id }}">
+                                <i class="fa fa-sm fa-sort"></i>
+                            </button>
+                            {% if bed.status == 'Unassigned' %}
+                                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#allocateModal{{ bed.id }}">
+                                    <i class="fa fa-sm fa-plus"></i>
+                                </button>
+                            {% endif %}
+                        </div>
+                        <div class="modal fade" id="allocateModal{{ bed.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"># {{ bed.number }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="bed_id" value="{{ bed.id }}">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="id_patient">Patients</label>
+                                                <select name="patient_id" id="id_patient" class="custom-select">
+                                                    <option value="">---------</option>
+                                                    {% for patient in patients %}
+                                                        <option value="{{ patient.id }}">{{ patient.full_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_admitted_date">Date Admitted</label>
+                                                <input required type="date" name="admitted_at" id="id_admitted_date" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_admitted_date">Time Admitted</label>
+                                                <input required type="time" name="time_admitted" id="id_admitted_date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse multi-collapse" id="bed{{ bed.id }}">
+                        <div class="list-group-flush mt-2">
+                            <span class="h7">History</span>
+                            {% for ba in bed.bed_allocates.all %}
+                                <div class="list-group-item">
+                                    <div><a href="{% url 'department:patient-details' ba.patient.id %}">{{ ba.patient.full_name }}</a></div>
+                                    <div class="small">From: {{ ba.date_admitted }} To: {% if ba.date_discharged %} {{ ba.date_discharged }} {% else %}Not yet {% endif %}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
