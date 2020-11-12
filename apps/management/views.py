@@ -191,11 +191,21 @@ class UpdateBill(LoginRequiredMixin, RedirectView):
 @login_required()
 def hr(request):
     all_complaint = Complaint.objects.all().exclude(status=2)
+    leave_period = LeavePeriod.objects.all()
     context = {
-        'complaints': all_complaint
+        'complaints': all_complaint,
+        'leave_period': leave_period,
     }
 
     return render(request,template_name='management/hr_page.html', context=context)
+
+
+class LeavePeriodDetails(LoginRequiredMixin, DetailView):
+    template_name = 'management/leave_period_details.html'
+    queryset = LeavePeriod.objects.all()
+    model = LeavePeriod
+    pk_url_kwarg = 'id'
+
 
 
 @login_required()
@@ -364,7 +374,7 @@ class NewLeavePeriod(LoginRequiredMixin, CreateView):
         users = User.objects.all()
         # convert end_date to a datetime type without the time data
         # Import datetime at the top
-        date1 = datetime.datetime.strptime(form.instance.end_date, "%Y-%m-%d")
+        # date1 = datetime.datetime.strptime(form.instance.end_date, "%Y-%m-%d")
 
         # leave_period = LeavePeriod.objects.get(end_date__year=date1.year)
         # looping through all the users
@@ -398,14 +408,14 @@ class NewLeavePeriod(LoginRequiredMixin, CreateView):
         return valid
 
 
-class LeavePeriod(LoginRequiredMixin, CreateView):
-    template_name = 'management/leave_period_new.html'
-    success_url = reverse_lazy('management:hr')
-    form_class = LeavePeriodForm
-    queryset = Leave.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(LeavePeriod, self).get_context_data(**kwargs)
-        context['leave_period'] = Leave.objects.all()
-
-        return context
+# class LeavePeriod(LoginRequiredMixin, CreateView):
+#     template_name = 'management/leave_period_new.html'
+#     success_url = reverse_lazy('management:hr')
+#     form_class = LeavePeriodForm
+#     queryset = Leave.objects.all()
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(LeavePeriod, self).get_context_data(**kwargs)
+#         context['leave_period'] = Leave.objects.all()
+#
+#         return context

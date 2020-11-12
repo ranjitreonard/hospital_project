@@ -19,7 +19,7 @@ class Staff(models.Model):
     number_of_days_left = models.IntegerField(blank=True, null=True, default=0)
     total_number_of_days = models.IntegerField(blank=True, null=True, default=0)
     leaves = models.ManyToManyField('Leave', related_name='staff_leaves', blank=True)
-    leave_period = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
+    leave_period = models.ForeignKey('management.LeavePeriod', on_delete=models.SET_NULL,
                                      related_name='staff_leave_period', blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     number_of_days_used = models.IntegerField(blank=True, null=True, default=0)
@@ -31,6 +31,7 @@ class Staff(models.Model):
 
     class Meta:
         db_table = 'staff'
+        get_latest_by = 'created_at'
 
 
 LEAVE_STATUS = {
@@ -56,4 +57,4 @@ class Leave(models.Model):
 
     class Meta:
         db_table = 'leave'
-        get_latest_by = 'created_at'
+        # get_latest_by = 'created_at'

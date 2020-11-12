@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 
 from apps.management.models import Treatment, Patient
+from apps.portal.models import Bill
 from .models import *
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, RedirectView
@@ -54,13 +55,14 @@ def treatment_details(request, id):
         prescription = Prescription.objects.get(treatment_id=treatment.id, patient_id=treatment.diagnosis.patient.id)
     except Prescription.DoesNotExist:
         pass
-
-    medicines = Medicine.objects.exclude(units_left=0)
-
+    medicines = None
     total = 0
-    for pm in prescription.medicines.all():
-        total += pm.amount
-
+    try:
+        medicines = Medicine.objects.exclude(units_left=0)
+        for pm in prescription.medicines.all():
+            total += pm.amount
+    except:
+        pass
 
     context = {
         'object': treatment,
@@ -97,7 +99,7 @@ def treatment_details(request, id):
         prescription.medicines.add(pm)
         prescription.save()
 
-        return redirect(reverse_lazy('pharmacy:treatment-details', kwargs={'id':id}))
+        return redirect(reverse_lazy('pharmacy:treatment-details', kwargs={'id': id}))
 
     return render(request, template_name='pharmacy/treatment_details.html', context=context)
 
@@ -134,12 +136,12 @@ class OpenPrescription(LoginRequiredMixin, RedirectView):
 
 class RemovePrescribedMedicine(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return reverse_lazy('pharmacy:treatment-details', kwargs={'id':kwargs.get('treatment_id')})
+        return reverse_lazy('pharmacy:treatment-details', kwargs={'id': kwargs.get('treatment_id')})
 
     def get(self, request, *args, **kwargs):
         treatment_id = kwargs.get('treatment')
-        pm_id = kwargs.get('pm_id')#pm = prescribe_medicine_id
-        pres_id = kwargs.get(('pres_id'))#pres = prescription_id
+        pm_id = kwargs.get('pm_id')  # pm = prescribe_medicine_id
+        pres_id = kwargs.get(('pres_id'))  # pres = prescription_id
 
         prescription = Prescription.objects.get(id=pres_id)
         prescribed_medicine = PrescribedMedicine.objects.get(id=pm_id, prescription=prescription)
@@ -147,3 +149,34 @@ class RemovePrescribedMedicine(LoginRequiredMixin, RedirectView):
         prescribed_medicine.delete()
 
         return super(RemovePrescribedMedicine, self).get(self, request, *args, **kwargs)
+
+
+class ConfirmPrescription(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse_lazy('pharmacy:treatment-details', kwargs={'id':kwargs.get('treatment_id')})
+
+    def get(self, request, *args, **kwargs):
+        prescription = Prescription.objects.get(id=kwargs.get('pres_id'))
+        treatment = Treatment.objects.get(id=kwargs.get('treatment_id'))
+
+        total = 0
+
+        for pm in prescription.medicines.all():
+            total += pm.amount
+
+        #this is for creating a bill
+        bill = Bill.objects.create(
+            bill_type='PhB',
+            patient=treatment.diagnosis.patient,
+            amount=total,
+            status=0,
+            prescription=prescription,
+            created_by=self.request.user
+        )
+        prescription.total = total
+
+        prescription.status = 1
+
+        prescription.save()
+
+        return super(ConfirmPrescription, self).get(self, request, *args, **kwargs)

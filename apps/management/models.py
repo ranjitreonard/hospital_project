@@ -247,7 +247,7 @@ class LeavePeriod(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     number_of_days = models.IntegerField(blank=True, null=True, default=0)
-    days_allocated = models.IntegerField(blank=True, null=True, default=0)
+    days_allowed = models.IntegerField(blank=True, null=True, default=0)
     staffs = models.ManyToManyField('staff.Staff', related_name='staff_leave', blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='leave_periods',

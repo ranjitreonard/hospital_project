@@ -1,7 +1,7 @@
 {% extends 'layouts/admin_layout.html' %}
 {% load bootstrap4 %}
 {% block page_title %}
-    Leave
+    Leave Period
 {% endblock %}
 {% block title %}
     Leave
@@ -12,7 +12,7 @@
             <form action="" method="post">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                <button class="btn btn-info btn-block">Submit</button>
+                <button type="submit" class="btn btn-info btn-block">Submit</button>
             </form>
         </div>
     </div>

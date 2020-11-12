@@ -34,7 +34,7 @@ class UserForm(ModelForm):
 class LeavePeriodForm(ModelForm):
     class Meta:
         model = LeavePeriod
-        fields = ('start_date', 'end_date', 'days_allocated')
+        fields = ('start_date', 'end_date', 'days_allowed')
         widgets = {
             'start_date': DateInput(attrs={'type': 'date', 'required': True}),
             'end_date': DateInput(attrs={'type': 'date', 'required': True})
@@ -42,10 +42,10 @@ class LeavePeriodForm(ModelForm):
 
     def clean_end_date(self):
         end_date = self.cleaned_data.get('end_date')
-        date1 = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+        # date1 = datetime.datetime.strptime(end_date, "%Y-%m-%d")
     
         try:
-            LeavePeriod.objects.get(end_date__year=date1.year)
+            LeavePeriod.objects.get(end_date__year=end_date.year)
             # raise error if try passes
             raise ValidationError('This Leave Period already exists')
         except LeavePeriod.DoesNotExist:

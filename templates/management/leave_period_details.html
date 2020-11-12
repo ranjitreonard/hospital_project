@@ -1,0 +1,50 @@
+{% extends 'layouts/admin_layout.html' %}
+{% block title %}Leave Period Details{% endblock %}
+{% block page_title %}Leave Period Details{% endblock %}
+{% block hr %}active{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item"><a href="#staff" data-toggle="tab" role="tab" aria-controls="staff" aria-selected="false" class="nav-link active" id="staff-tab">Staff</a></li>
+                <li class="nav-item"><a href="#leaves" data-toggle="tab" role="tab" aria-controls="leaves" aria-selected="false" class="nav-link " id="leaves-tab">Leave </a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="staff" role="tabpanel" aria-labelledby="staff-tab">
+                    <div class="table-responsive">
+                        <table class="table table-borderless" id="dataTable">
+                            <thead>
+                            <tr>
+                                <th>Staff Name</th>
+                                <th>Number of Days Allowed</th>
+                                <th>Number of Days Used</th>
+                                <th>Number of Days Left</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for staff in object.staffs.all %}
+                                <tr>
+                                    <td>{{ staff.user.full_name }}</td>
+                                    <td>{{ staff.total_number_of_days }}</td>
+                                    <td>{{ staff.number_of_days_used }}</td>
+                                    <td>{{ staff.number_of_days_left }}</td>
+                                    <td><a href="" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-list"></i>
+                                    </a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="leaves" role="tabpanel" aria-labelledby="leaves-tab">
+                    <p>hello</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

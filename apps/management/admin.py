@@ -10,5 +10,6 @@ admin.site.register(MedicalDiagnosis)
 admin.site.register(Treatment)
 admin.site.register(Complaint)
 admin.site.register(Request)
+admin.site.register(LeavePeriod)
 
 

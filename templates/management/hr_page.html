@@ -3,6 +3,11 @@
 {% block page_title %}Human Resource{% endblock %}
 {% load bootstrap4 %}
 {% block title %}Human Resource{% endblock %}
+{% block btn %}
+    <a href="{% url 'management:new-leave-period' %}" class="btn btn-sm btn-danger">
+        <i class="fa fa-plus"></i>
+    </a>
+{% endblock %}
 {% block content %}
     <div class="card">
         <div class="card-header">
@@ -46,21 +51,29 @@
                 </div>
                 <div class="tab-pane fade " id="leave" role="tabpanel" aria-labelledby="leave-tab">
                     <div class="list-group">
-                        <div class="row">
-                            <div class="col-10">
 
-                            </div>
-                            <div class="col-2">
-                                <a href="{% url 'management:apply-leave' %}" class="btn btn-danger btn-block">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                            </div>
-                        </div>
+                        {% for object in leave_period %}
 
+                            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h5>Leave Period:   {{ object.start_date}} - {{ object.end_date }}</h5>
+                                        <small>Days Allowed:   {{ object.days_allowed }}</small>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="{% url 'management:leave-period-details' object.id %}" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-list"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

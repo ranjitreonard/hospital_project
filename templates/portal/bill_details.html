@@ -1,5 +1,4 @@
 {% extends 'layouts/portal_layout.html' %}
-
 {% block bill %}
     active
 {% endblock %}
@@ -17,44 +16,69 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-
     <div class="row">
-        <div class="col-8">
-            <div class="list-group-flush">
-                <div class="list-group-item">
-                    <div class="row">
-                        <div class="col">Date Admitted</div>
-                        <div class="col" align="right">{{ object.patient.date_admitted }}</div>
+        {% if object.bill_type == 'WB' %}
+            <div class="col-8">
+                <div class="list-group-flush">
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col">Date Admitted</div>
+                            <div class="col" align="right">{{ object.patient.date_admitted }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="list-group-item">
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col">{% if object.status == 1 %}Date Discharged{% else %}Date to be Discharged{% endif %}</div>
+                            <div class="col" align="right">{% if object.status == 1 %}{{ object.patient.date_discharged }}{% else %}{{ date_to_be_discharged }}{% endif %}</div>
+                        </div>
+                    </div><div class="list-group-item">
                     <div class="row">
-                        <div class="col">{% if object.status == 1 %}Date Discharged{% else %}Date to be Discharged{% endif %}</div>
-                        <div class="col" align="right">{% if object.status == 1 %}{{ object.patient.date_discharged }}{% else %}{{ date_to_be_discharged }}{% endif %}</div>
+                        <div class="col">Numbers Of Days</div>
+                        <div class="col" align="right">{% if object.status == 1 %}{{ days_spent }}{% else %}{{ number_of_days }}{% endif %}</div>
                     </div>
                 </div><div class="list-group-item">
-                <div class="row">
-                    <div class="col">Numbers Of Days</div>
-                    <div class="col" align="right">{% if object.status == 1 %}{{ days_spent }}{% else %}{{ number_of_days }}{% endif %}</div>
-                </div>
-            </div><div class="list-group-item">
-                <div class="row">
-                    <div class="col">Amount Per Day</div>
-                    <div class="col" align="right">{{ amount_per_day }}</div>
-                </div>
-            </div>
-                <div class="list-group-item">
                     <div class="row">
-                        <div class="col">{% if object.status == 1 %}Amount Paid{% else %}Total Amount To Be Paid{% endif %}</div>
-                        <div class="col" align="right">GHS {% if object.status == 1 %}{{ object.amount }}{% else %}{{ total_amount }}{% endif %}</div>
+                        <div class="col">Amount Per Day</div>
+                        <div class="col" align="right">{{ amount_per_day }}</div>
                     </div>
                 </div>
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col">{% if object.status == 1 %}Amount Paid{% else %}Total Amount To Be Paid{% endif %}</div>
+                            <div class="col" align="right">GHS {% if object.status == 1 %}{{ object.amount }}{% else %}{{ total_amount }}{% endif %}</div>
+                        </div>
+                    </div>
 
+                </div>
+                {% if object.status == 0 %}
+                    <a href="{% url 'portal:confirm-discharge' object.uuid %}" class="btn btn-sm btn-block btn-info">Confirm Payment</a>
+                {% endif %}
             </div>
+        {% else %}
+            <div class="col-8">
+                <div class="list-group-flush">
+                    {% for med in object.prescription.medicines.all %}
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col">{{ med.medicine.name }}</div>
+                                <div class="col" align="right">GHS {{ med.amount }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col font-weight-bolder">Total</div>
+                            <div class="col font-weight-bolder" align="right">GHS {{ object.prescription.total }}</div>
+                        </div>
+
+                    </div>
+                </div>
             {% if object.status == 0 %}
-                <a href="{% url 'portal:confirm-discharge' object.uuid %}" class="btn btn-sm btn-block btn-info">Confirm Payment</a>
+                <a href="{% url 'portal:confirm-prescription' object.uuid %}" class="btn btn-sm btn-success">Confirm Payment</a>
             {% endif %}
-        </div>
+            </div>
+        {% endif %}
+
         {% if object.status == 1 %}
             <div class="col-4">
                 <div class="card">
@@ -65,12 +89,33 @@
                                 <small><h3 style="color: blue">Ai Hospital </h3></small>
                                 <small>Wl 63/1, Kasoa Evalip</small>
                                 <small>Contact Number: 0202020971</small>
-                                <p>Patient Name: {{ object.patient.full_name }}</p>
-                                <p>Date Admitted: {{object.patient.created_at }}</p>
-                                <p>Discharged Date: {{ date_to_be_discharged }}</p>
-                                <p>Number of Days: {{ object.number_of_days }}</p>
-                                <p>Amount Per Day:GHS  {{ amount_per_day }}</p>
-                                <p>Total Amount:GHS {{ object.amount }}</p>
+                                <small>info@aihospital.com</small>
+                                {% if object.bill_type == 'PhB' %}
+                                    <table class="table table-sm table-bordered mt-4">
+                                        <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Amount (GHS)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for med in object.prescription.medicines.all %}
+                                            <tr>
+                                                <td>{{ med.medicine.name }}</td>
+                                                <td>{{ med.amount }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>Patient Name: {{ object.patient.full_name }}</p>
+                                    <p>Date Admitted: {{object.patient.created_at }}</p>
+                                    <p>Discharged Date: {{ date_to_be_discharged }}</p>
+                                    <p>Number of Days: {{ object.number_of_days }}</p>
+                                    <p>Amount Per Day:GHS  {{ amount_per_day }}</p>
+                                    <p>Total Amount:GHS {{ object.amount }}</p>
+                                {% endif %}
+                                <p><small>Issued on: {{ object.created_at }} By: {{ object.created_by.full_name }} </small></p>
                             </div>
                         </div>
                     </div>
