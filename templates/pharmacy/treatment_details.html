@@ -1,0 +1,121 @@
+{% extends 'layouts/pharmacy_layout.html' %}
+{% block treat %}
+    active
+{% endblock %}
+{% block css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+{% block page_title %}
+    {{ object.diagnosis.patient.full_name }}'s Treatment
+{% endblock %}
+{% block title %}
+    {{ object.diagnosis.patient.full_name }}'s Treatment
+{% endblock %}
+{% block btn %}
+    {% if object.pharmacy_prescription %}
+        <button class="btn btn-sm btn-info">Confirm</button>
+    {% else %}
+        <a href="{% url 'pharmacy:prescription-open' treatment_id=object.id patient_id=object.diagnosis.patient.id  %}" class="btn btn-sm btn-success">Open</a>
+    {% endif %}
+
+
+{% endblock %}
+{% block content %}
+    <small>{{ object.prescription }}</small>
+    <div class="card mt-3 border-0">
+        <div class="card-header bg-success text-white">
+            <div class="row">
+                <div class="col" style="border-right: 2px solid lightblue">
+                    <div class="row">
+                        <div class="col">Patient's ID</div>
+                        <div class="col">{{ object.diagnosis.patient.patient_id }}</div>
+                    </div>
+                </div>
+                <div class="col" style="border-right: 2px solid lightblue">
+                    <div class="row">
+                        <div class="col">Patient Name</div>
+                        <div class="col">{{ object.diagnosis.patient.full_name }}</div>
+                    </div>
+                </div>
+                <div class="col" >
+                    <div class="row">
+                        <div class="col">Diagnosis</div>
+                        <div class="col">{{ object.diagnosis.diagnosis }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if object.pharmacy_prescription %}
+        <div class="table-responsive mt-5">
+
+        <span class="text-danger">{{ errors }}</span>
+            <table class="table table-bordered" id="dataTable">
+                <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Quantity</th>
+                    <th>Dosage</th>
+                    <th>Amount (GHS)</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <td>
+                            <select name="medicine" id="id_medicine" class="custom-select">
+                                <option value="">----------</option>
+                                {% for medicine in medicines %}
+                                    <option value="{{ medicine.id }}">{{ medicine.name }} | {{ medicine.units_left }} | GHS {{ medicine.selling_price_per_unit }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="quantity" placeholder="Quantity" id="id_quantity" class="form-control">
+                        </td>
+                        <td><input type="text" name="dosage" id="id_dosage" placeholder="Dosage" class="form-control">
+                        </td>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-sm btn-info">Add</button>
+                        </td>
+
+                    </form>
+
+                </tr>
+                {% for medicine in object.pharmacy_prescription.medicines.all %}
+                    <tr>
+                        <td>{{ medicine.medicine.name }}</td>
+                        <td>{{ medicine.quantity }}</td>
+                        <td>{{ medicine.dosage }}</td>
+                        <td>{{ medicine.amount }}</td>
+
+                        <td>
+                            <a href="{% url 'pharmacy:prescribed-medicine-remove' treatment_id=object.id pres_id=object.pharmacy_prescription.id pm_id=medicine.id%}" class="btn btn-sm btn-danger">
+                                <i class="fa fa-ban"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total</td>
+                    <td>{{ total }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info">Confirm</button>
+                    </td>
+
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    {% endif %}
+
+{% endblock %}

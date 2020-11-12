@@ -1,0 +1,88 @@
+{% extends 'layouts/portal_layout.html' %}
+{% block bill %}
+    active
+{% endblock %}
+{% block page_title %}
+    Bills
+{% endblock %}
+{% block title %}
+    Bills
+{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient</th>
+                        <th>Bill Type</th>
+                        <th>Services</th>
+                        <th>Number of Days</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {%for object in object_list %}
+                        <tr>
+                            <td>{{ object.patient.patient_id }}</td>
+                            <td>{{ object.patient.full_name }}</td>
+                            <td>{{ object.get_bill_type_display }}</td>
+                            <td>{% if object.service %}{{ object.service }}{% else %}N/A{% endif %} </td>
+                            <td>{% if object.number %}{{ object.number_of_days }}{% else %}N/A{% endif %}</td>
+                            <td>{% if object.amount %}GHS {{ object.amount }}{% else %}N/A{% endif %}</td>
+                            <td>{{ object.get_status_display }}</td>
+                            <td>
+                                {% if object.status == 0 %}
+                                    {% if object.bill_type == 'CB' or object.bill_type == 'CnB' or object.bill_type == 'LB' or object.bill_type == 'PB' %}
+                                        <a href="#" data-toggle="modal" data-target="#billModal{{ object.id }}" class="btn btn-sm btn-success">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+
+                                        <div class="modal fade" id="billModal{{ object.id }}" tabindex="-1" role="dialog" aria-labelledby="billModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="billModalLongTitle">Confirm Bill</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {% if object.bill_type == 'CB' or object.bill_type == 'CnB' or object.bill_type == 'LB' or object.bill_type == 'PB'%}
+                                                            Please make sure you have received payment before confirming
+                                                        {% elif object.bill_type == 'WB' %}
+                                                            <div class="ist-group-flush">
+                                                                <div class="list-group-item">Date Admitted: {{ object.patient.date_admitted }}</div>
+                                                                <div class="list-group-item">Date to Be Discharged</div>
+                                                                <div class="list-group-item">Amount: </div>
+                                                            </div>
+                                                        {% endif %}
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <a href="{% url 'portal:confirm-payment' uuid=object.uuid  patient_id=object.patient.id %}" type="button" class="btn btn-primary">Confirm</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <a href="{% url 'portal:bill-details' object.uuid %}" class="btn btn-sm btn-info">
+                                        <i class="fa fa-list"></i>
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

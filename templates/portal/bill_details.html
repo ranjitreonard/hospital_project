@@ -1,0 +1,81 @@
+{% extends 'layouts/portal_layout.html' %}
+
+{% block bill %}
+    active
+{% endblock %}
+{% block page_title %}
+    {{ object.patient.full_name }} - {{ object.get_bill_type_display }}
+{% endblock %}
+{% block title %}
+    {{ object.patient.full_name }} - {{ object.get_bill_type_display }}
+{% endblock %}
+{% block btn %}
+    {% if object.status == 1 %}
+        <a href="#" class="btn btn-sm btn-info">
+            <i class="fa fa-print"></i> Print
+        </a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-8">
+            <div class="list-group-flush">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col">Date Admitted</div>
+                        <div class="col" align="right">{{ object.patient.date_admitted }}</div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col">{% if object.status == 1 %}Date Discharged{% else %}Date to be Discharged{% endif %}</div>
+                        <div class="col" align="right">{% if object.status == 1 %}{{ object.patient.date_discharged }}{% else %}{{ date_to_be_discharged }}{% endif %}</div>
+                    </div>
+                </div><div class="list-group-item">
+                <div class="row">
+                    <div class="col">Numbers Of Days</div>
+                    <div class="col" align="right">{% if object.status == 1 %}{{ days_spent }}{% else %}{{ number_of_days }}{% endif %}</div>
+                </div>
+            </div><div class="list-group-item">
+                <div class="row">
+                    <div class="col">Amount Per Day</div>
+                    <div class="col" align="right">{{ amount_per_day }}</div>
+                </div>
+            </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col">{% if object.status == 1 %}Amount Paid{% else %}Total Amount To Be Paid{% endif %}</div>
+                        <div class="col" align="right">GHS {% if object.status == 1 %}{{ object.amount }}{% else %}{{ total_amount }}{% endif %}</div>
+                    </div>
+                </div>
+
+            </div>
+            {% if object.status == 0 %}
+                <a href="{% url 'portal:confirm-discharge' object.uuid %}" class="btn btn-sm btn-block btn-info">Confirm Payment</a>
+            {% endif %}
+        </div>
+        {% if object.status == 1 %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">Receipt</div>
+                    <div class="card-body">
+                        <div style="border: 2px black;">
+                            <div style="margin-top: 12px;">
+                                <small><h3 style="color: blue">Ai Hospital </h3></small>
+                                <small>Wl 63/1, Kasoa Evalip</small>
+                                <small>Contact Number: 0202020971</small>
+                                <p>Patient Name: {{ object.patient.full_name }}</p>
+                                <p>Date Admitted: {{object.patient.created_at }}</p>
+                                <p>Discharged Date: {{ date_to_be_discharged }}</p>
+                                <p>Number of Days: {{ object.number_of_days }}</p>
+                                <p>Amount Per Day:GHS  {{ amount_per_day }}</p>
+                                <p>Total Amount:GHS {{ object.amount }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

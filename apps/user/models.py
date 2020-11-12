@@ -40,6 +40,13 @@ USERTYPE = {
 }
 
 
+STAFF_STATUS = {
+    ('Leave', 'Leave'),
+    ('Active', 'Active'),
+    ('Suspended', 'Suspended'),
+    ('Dismissed', 'Dismissed')
+}
+
 ROLES = {
     ('HR', 'Human Resource'),
     ('ACC', 'Accountant'),
@@ -92,6 +99,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    status = models.CharField(blank=True, null=True, max_length=200, choices=STAFF_STATUS)
 
     date_joined = models.DateTimeField(default=timezone.now)
 
@@ -105,7 +113,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.first_name + '  ' + self.last_name
 
     def user_kind(self):
-        return self.get_user_type_display() + ' - ' + self.get_role_display()
+        return f'{self.get_user_type_display()} - {self.get_role_display()}'
 
     class Meta:
         verbose_name_plural = 'User'

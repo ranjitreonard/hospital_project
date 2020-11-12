@@ -1,0 +1,38 @@
+{% extends 'layouts/pharmacy_layout.html' %}
+{% block med %}active{% endblock %}
+{% block page_title %}Medicines{% endblock %}
+{% block title %}Medicines{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Quantity Left</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for medicine in object_list %}
+                    <tr>
+                        <td>{{ medicine.name }}</td>
+                    <td>{{ medicine.medicine_type }}</td>
+                    <td>{{ medicine.units_left }}</td>
+                    <td>{{ medicine.selling_price_per_unit }}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-success" title="Details">
+                            <i class="fa fa-list"></i>
+                        </a>
+                    </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

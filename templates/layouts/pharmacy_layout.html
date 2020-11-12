@@ -18,6 +18,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% block css %} {% endblock %}
 
 </head>
 
@@ -27,14 +29,14 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
-                <i class="fas fa-sitemap"></i>
+                <i class="fas fa-plus-square"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Portal</div>
+            <div class="sidebar-brand-text mx-3">Pharmacy</div>
         </a>
 
         <!-- Divider -->
@@ -42,7 +44,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item {% block dash %}{% endblock %}">
-            <a class="nav-link" href="{% url 'portal:portal' %}">
+            <a class="nav-link" href="{% url 'pharmacy:dashboard' %}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -52,9 +54,9 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {% block acc %}{% endblock %}">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{% url 'pharmacy:treatment' %}">
                 <i class="fas fa-fw fa-credit-card"></i>
-                <span>Payment</span></a>
+                <span>Treatment</span></a>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -63,31 +65,31 @@
 
 
          <li class="nav-item {% block hr %}{% endblock %}">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{% url 'pharmacy:medicines' %}">
                 <i class="fas fa-fw fa-handshake"></i>
-                <span>Income</span></a>
+                <span>Medicine</span></a>
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
-
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {% block staff %}{% endblock %}">
-            <a class="nav-link" href="{% url 'management:staff' %}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>OPD Payment</span></a>
-        </li>
-
-        <hr class="sidebar-divider">
-
-        <!-- Nav Item - Charts -->
-         <li class="nav-item {% block mgt %}{% endblock %}">
-            <a class="nav-link" href="{% url 'management:wards' %}">
-                <i class="fas fa-fw fa-cogs"></i>
-                <span>Treatment</span></a>
-        </li>
-        <!-- Nav Item - Tables -->
+{#        <hr class="sidebar-divider">#}
+{##}
+{##}
+{#        <!-- Nav Item - Pages Collapse Menu -->#}
+{#        <li class="nav-item {% block staff %}{% endblock %}">#}
+{#            <a class="nav-link" href="{% url 'management:staff' %}">#}
+{#                <i class="fas fa-fw fa-user"></i>#}
+{#                <span>OPD Payment</span></a>#}
+{#        </li>#}
+{##}
+{#        <hr class="sidebar-divider">#}
+{##}
+{#        <!-- Nav Item - Charts -->#}
+{#         <li class="nav-item {% block mgt %}{% endblock %}">#}
+{#            <a class="nav-link" href="{% url 'management:wards' %}">#}
+{#                <i class="fas fa-fw fa-cogs"></i>#}
+{#                <span>Treatment</span></a>#}
+{#        </li>#}
+{#        <!-- Nav Item - Tables -->#}
 
 
         <!-- Divider -->
@@ -334,7 +336,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="{% url 'user:logout' %}">Logout</a>
             </div>
         </div>
     </div>
@@ -352,6 +354,11 @@
 
 <!-- Page level plugins -->
 <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+{#dataTable#}
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
 
 <!-- Page level custom scripts -->
 <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>

@@ -1,0 +1,68 @@
+{% extends 'layouts/admin_layout.html' %}
+{% load humanize %}
+{% block page_title %}
+    Complaint by: {{ object.created_by.full_name }}
+{% endblock %}
+{% load bootstrap4 %}
+{% block title %}
+    {{ object.complaints }}
+{% endblock %}
+{% block hr %}
+    active
+{% endblock %}
+{% block css %}
+    <style>
+        .complaints{
+            height: 250px;
+            overflow-y: auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="complaints">
+        <div class="list-group-flush">
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="bg-primary border-0 text-white list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <small class="text-white-50">{% if not object.seen %}<i class="fa fa-check text-primary" title="Sent"></i>{% elif object.seen %}<i class="fa fa-check-double text-success" title="Read"></i>{% endif %} {{ object.created_at |naturaltime }}</small>
+                        </div>
+                        <p class="mb-1">
+                            {{ object.complaint }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    {% if object.status == 1 %}
+                        <div class="bg-info border-0 text-white list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ object.review_by.full_name }}</h5>
+                                <small class="text-white-50">{{ object.review_at |naturaltime }}</small>
+                            </div>
+                            <p class="mb-1">
+                                {{ object.review }}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if object.status == 0 %}
+        <div style="bottom: 0; position: relative" class="mt-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea autofocus placeholder="Type your review here!" name="review" id="id_review" required cols="30" rows="1" class="form-control border-0"></textarea>
+                </div>
+                <button class="btn btn-sm btn-outline-warning btn-block">
+                    <i class="fa fa-paper-plane"></i> Send
+                </button>
+            </form>
+        </div>
+    {% endif %}
+
+{% endblock %}

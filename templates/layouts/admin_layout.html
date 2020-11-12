@@ -15,6 +15,7 @@
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
@@ -52,9 +53,19 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {% block acc %}{% endblock %}">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-credit-card"></i>
-                <span>Account</span></a>
+                <span>Accounts</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Overview:</h6>
+                    <a class="collapse-item {% block exp %}{% endblock %}" href="{% url 'management:expenditures' %}">Expenditure</a>
+                    <a class="collapse-item {% block rev %}{% endblock %}" href="#">Revenue</a>
+                    <a class="collapse-item {% block rem %}{% endblock %}" href="#">Remuneration</a>
+                    <a class="collapse-item {% block req %}{% endblock %}" href="{% url 'management:requests' %}">Requests</a>
+                </div>
+            </div>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -62,8 +73,8 @@
         <hr class="sidebar-divider">
 
 
-         <li class="nav-item {% block hr %}{% endblock %}">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item {% block hr %}{% endblock %}">
+            <a class="nav-link" href="{% url 'management:hr' %}">
                 <i class="fas fa-fw fa-handshake"></i>
                 <span>Human Resource</span></a>
         </li>
@@ -82,7 +93,7 @@
         <hr class="sidebar-divider">
 
         <!-- Nav Item - Charts -->
-         <li class="nav-item {% block mgt %}{% endblock %}">
+        <li class="nav-item {% block mgt %}{% endblock %}">
             <a class="nav-link" href="{% url 'management:wards' %}">
                 <i class="fas fa-fw fa-cogs"></i>
                 <span>Management</span></a>
@@ -116,7 +127,7 @@
                 </button>
 
                 <!-- Topbar Search -->
-               <a class="btn btn-sm btn-danger" href="{% url 'apps' %}">Apps</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'apps' %}">Apps</a>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -288,7 +299,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">{% block page_title %}{% endblock %}</h1>
                     {% block btn %}{% endblock %}
-{#                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>#}
+                    {#                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>#}
                 </div>
 
                 <!-- Content Row -->
@@ -334,7 +345,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="{% url 'user:logout' %}">Logout</a>
             </div>
         </div>
     </div>
@@ -349,6 +360,12 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
 
 <!-- Page level plugins -->
 <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>

@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import *
 from apps.department.forms import NewPatientForm
+from apps.portal.models import Bill, DefaultBill
 from . import forms
 from apps.management.models import Patient, MedicalDiagnosis, Treatment, Ward, Bed, BedAllocate
 from .models import Note
@@ -26,6 +28,23 @@ class NewPatient(LoginRequiredMixin, CreateView):
         valid = super(NewPatient, self). form_valid(form)
 
         form.instance.created_by = self.request.user
+        # try:
+        card_charge = DefaultBill.objects.get(bill_type='CB')
+        #
+        # except DefaultBill.DoesNotExist:
+        #     raise ValidationError(
+        #         message='There is no card bills in the system'
+        #     )
+
+        card_charge = DefaultBill.objects.get(bill_type='CB')
+        Bill.objects.create(
+            patient=form.instance,
+            bill_type='CB',
+            amount=card_charge.amount,
+            status=0,
+            created_by=self.request.user
+        )
+
         form.save()
 
         return valid
@@ -182,6 +201,7 @@ def add_treatment(request, diagnosis_id, patient_id):
 
     return redirect(reverse_lazy('department:patient-details', kwargs={'id': patient.id}))
 
+
 @login_required()
 def complete_treatment(request, treatment_id, patient_id):
     treatment = Treatment.objects.get(id=treatment_id)
@@ -251,7 +271,7 @@ def ward_details(request, id):
     if request.method == 'POST':
         bed = Bed.objects.get(id=request.POST.get('bed_id'))
         patient = Patient.objects.get(id=request.POST.get('patient_id'))
-        admitted_at = request.POST.get('time_admitted')
+        admitted_at = request.POST.get('admitted_at')
         time_admitted = request.POST.get('time_admitted')
 
         if patient.bed:
@@ -278,17 +298,15 @@ def ward_details(request, id):
         patient.bed = bed
         bed.save()
         patient.save()
-        return redirect(reverse_lazy('department:ward-details', kwargs= {'id':id}))
+        return redirect(reverse_lazy('department:ward-details', kwargs={'id':id}))
 
     return render(request, 'department/ward_details.html', context=context)
-
 
 
 class Wards(LoginRequiredMixin, ListView):
     template_name = 'department/ward_list.html'
     model = Ward
     queryset = Ward.objects.all()
-
 
 
 @login_required()
@@ -326,3 +344,26 @@ def allocate_bed(request, bed_id):
     patient.save()
 
     return redirect(reverse_lazy('department:ward-details', kwargs={'id': bed.ward.id}))
+
+
+class DischargedPatient(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse_lazy('department:patient-details', kwargs={'id': kwargs.get('id')})
+
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs.get('id')
+        patient = Patient.objects.get(id=patient_id)
+
+
+        bill_charge = DefaultBill.objects.get(bill_type='CnB')
+        Bill.objects.create(
+            patient=patient,
+            bill_type='WB' if patient.patient_type == 'Ward' else 'CnB',
+            amount=bill_charge.amount if patient.patient_type == 'OPD' else None,
+            status=0,
+            created_by=self.request.user
+        )
+        patient.patient_type = 'Discharged'
+        patient.save()
+
+        return super(DischargedPatient, self).get(self,request,*args, **kwargs)

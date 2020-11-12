@@ -1,0 +1,38 @@
+{% extends 'layouts/pharmacy_layout.html' %}
+{% block treat %}active{% endblock %}
+{% block page_title %}Treatments{% endblock %}
+{% block title %}Treatments{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Diagnosis</th>
+                        <th>Prescription</th>
+                        <th>Date Added</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.diagnosis.patient.patient_id }}</td>
+                    <td>{{ object.diagnosis.diagnosis }}</td>
+                    <td>{{ object.prescription }}</td>
+                    <td>{{ object.created_at }}</td>
+                    <td>
+                        <a href="{% url 'pharmacy:treatment-details' object.id %}" class="btn btn-sm btn-success">
+                            <i class="fa fa-list"></i>
+                        </a>
+                    </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

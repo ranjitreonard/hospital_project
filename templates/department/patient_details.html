@@ -4,6 +4,12 @@
     Patient {{ object.patient_id }}
 {% endblock %}
 {% block title %}Patient {{ object.patient_id }}{% endblock %}
+{% block btn %}
+    {% if object.patient_type == 'Ward' or object.patient_type == 'OPD' %}
+        <a href="{% url 'department:patient-discharge' object.id %}" class="btn btn-sm btn-danger">Discharge</a>
+    {% endif %}
+{% endblock%}
+
 {% block content %}
     <div class="row">
         <div class="col-md-8">
@@ -215,50 +221,50 @@
                                                                                     <i class="fa fa-list"></i>
                                                                                 </button>
                                                                             </div>
-                                                                                <div class="modal fade" id="treatsModal{{ treatment.id }}" tabindex="-1" aria-labelledby="treatsModalLabelModalLabel" aria-hidden="true">
-                                                                                    <div class="modal-dialog">
-                                                                                        <div class="modal-content">
-                                                                                            <div class="modal-header">
-                                                                                                <h5 class="modal-title" id="treatsModalLabel">{{ treatment.treatment }}</h5>
-                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                                </button>
+                                                                            <div class="modal fade" id="treatsModal{{ treatment.id }}" tabindex="-1" aria-labelledby="treatsModalLabelModalLabel" aria-hidden="true">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title" id="treatsModalLabel">{{ treatment.treatment }}</h5>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div class="list-group-flush">
+                                                                                                <div class="list-group-item">Prescription: {{ treatment.prescription }}</div>
+                                                                                                <div class="list-group-item">Status: {{ treatment.status }}</div>
+                                                                                                <div class="list-group-item">Created Date: {{ treatment.created_at }}</div>
+                                                                                                <div class="list-group-item">Time Treated: {{ treatment.time_treated }}</div>
+                                                                                                <div class="list-group-item">Date Treated: {{ treatment.date_treated }}</div>
                                                                                             </div>
-                                                                                            <div class="modal-body">
-                                                                                                <div class="list-group-flush">
-                                                                                                    <div class="list-group-item">Prescription: {{ treatment.prescription }}</div>
-                                                                                                    <div class="list-group-item">Status: {{ treatment.status }}</div>
-                                                                                                    <div class="list-group-item">Created Date: {{ treatment.created_at }}</div>
-                                                                                                    <div class="list-group-item">Time Treated: {{ treatment.time_treated }}</div>
-                                                                                                    <div class="list-group-item">Date Treated: {{ treatment.date_treated }}</div>
-                                                                                                </div>
-                                                                                                {% if treatment.status == 'Pending' %}
-                                                                                                    <hr>
-                                                                                                    <form action="{% url 'department:complete-treatment'  treatment_id=treatment.id patient_id=patient.id %}" method="post">
-                                                                                                        {% csrf_token %}
-                                                                                                        <div class="row">
-                                                                                                            <div class="col">
-                                                                                                                <div class="form-group">
-                                                                                                                    <label for="id_time">Time Completed</label>
-                                                                                                                    <input required type="time" name="time_completed" id="id_time" class="form-control">
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="col">
-                                                                                                                <div class="form-group">
-                                                                                                                    <label for="id_date">Date Completed</label>
-                                                                                                                    <input required type="date" name="date_completed" id="id_date" class="form-control">
-                                                                                                                </div>
+                                                                                            {% if treatment.status == 'Pending' %}
+                                                                                                <hr>
+                                                                                                <form action="{% url 'department:complete-treatment'  treatment_id=treatment.id patient_id=patient.id %}" method="post">
+                                                                                                    {% csrf_token %}
+                                                                                                    <div class="row">
+                                                                                                        <div class="col">
+                                                                                                            <div class="form-group">
+                                                                                                                <label for="id_time">Time Completed</label>
+                                                                                                                <input required type="time" name="time_completed" id="id_time" class="form-control">
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                        <button type="submit" class="btn btn-block btn-success">Complete</button>
-                                                                                                    </form>
-                                                                                                    <hr>
-                                                                                                    <a href="{% url 'department:cancel-treatment' treatment_id=treatment.id patient_id=patient.id %}" class="btn btn-block btn-danger">Cancel</a>
-                                                                                                {% endif %}
-                                                                                            </div>
+                                                                                                        <div class="col">
+                                                                                                            <div class="form-group">
+                                                                                                                <label for="id_date">Date Completed</label>
+                                                                                                                <input required type="date" name="date_completed" id="id_date" class="form-control">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <button type="submit" class="btn btn-block btn-success">Complete</button>
+                                                                                                </form>
+                                                                                                <hr>
+                                                                                                <a href="{% url 'department:cancel-treatment' treatment_id=treatment.id patient_id=patient.id %}" class="btn btn-block btn-danger">Cancel</a>
+                                                                                            {% endif %}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 {% endfor %}

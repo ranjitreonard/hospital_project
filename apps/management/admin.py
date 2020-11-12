@@ -8,5 +8,7 @@ admin.site.register(Patient)
 admin.site.register(BedAllocate)
 admin.site.register(MedicalDiagnosis)
 admin.site.register(Treatment)
+admin.site.register(Complaint)
+admin.site.register(Request)
 
 

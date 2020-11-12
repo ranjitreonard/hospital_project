@@ -1,0 +1,57 @@
+{% extends 'layouts/admin_layout.html' %}
+{% block req %}
+    active
+{% endblock %}
+{% load humanize %}
+{% block title %}
+    Request
+{% endblock %}
+{% block page_title %}
+    Requests
+{% endblock %}
+{% block acc %}
+    active
+{% endblock %}
+{% block content %}
+
+    <div class="list-group-flush">
+        {% for request in object_list %}
+            <div class="list-group-item {% if request.status == 0 %} border-left-primary{% elif request.status == 1 %}border-left-success{% else %} border-left-danger{% endif %} list-group-item-action-flex-column align-item-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ request.department }}</h5>
+                    <small>{{ request.created_at | ordinal }}</small>
+
+                </div>
+                <p>{{ request.description }}</p>
+                <div class="row">
+                    <div class="col-10">
+                        {% if request.comment %}
+                       Comment: {{ request.comment }}
+                        {% endif %}
+                    </div>
+                    <div class="col-2">
+                        {% if request.status == 0 %}
+                             <a href="{% url 'management:change-request-status' request.id %}" class="btn btn-sm btn-outline-danger" title="Approve">
+                            <i class="fa fa-check text-success"></i>
+                        </a>
+                        <button class="btn btn-sm btn-outline-dark" title="Reject" type="button" data-toggle="collapse" data-target="#cancelRequest{{ request.id }}" aria-expanded="false" aria-controls="cancelRequest{{ request.id }}">
+                            <i class="fa fa-ban text-danger"></i>
+                        </button>
+                        {% endif %}
+
+                    </div>
+                </div>
+            <div class="collapse multi-collapse" id="cancelRequest{{ request.id }}">
+                <form action="{% url 'management:change-request-status' request.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_comment">Comment</label>
+                        <textarea required name="comment" placeholder="Enter your comments here" id="id_comment" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <input type="submit" value="Reject" class="btn btn-sm btn-block btn-warning">
+                </form>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

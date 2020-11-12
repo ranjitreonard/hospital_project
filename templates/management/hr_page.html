@@ -1,0 +1,66 @@
+{% extends 'layouts/admin_layout.html' %}
+{% block hr %}active{% endblock %}
+{% block page_title %}Human Resource{% endblock %}
+{% load bootstrap4 %}
+{% block title %}Human Resource{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                <li class="nav-item"><a href="#complaints" data-toggle="tab" role="tab" aria-controls="complaints" aria-selected="false" class="nav-link active" id="complaints-tab">Complaints ({{ complaint.count }})</a></li>
+                <li class="nav-item"><a href="#leave" data-toggle="tab" role="tab" aria-controls="leave" aria-selected="false" class="nav-link " id="leave-tab">Leave Request()</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="complaints" role="tabpanel" aria-labelledby="complaints-tab">
+                    <div class="list-group">
+                        {% for object in complaints %}
+                            <div class="list-group-item list-group-item-action flex-column align-items-start {% if object.status == 'Pending' %} border-left-primary {% elif object.status == 'Canceled' %} border-left-danger {% else %} border-left-success {% endif %}">
+                                <a href="{% url 'management:complaint-details' object.id %}" class="d-flex w-100 card-link justify-content-between">
+                                    <h5 class="mb-1">{{ object.created_by.full_name }}</h5>
+                                    <small class="text-muted">{{ object.created_at }}</small>
+                                </a>
+                                <p class="mb-1">{{ object.complaint }}</p>
+                                <div class="row">
+                                    <div class="col-10">
+                                        {% if object.status == 'Resolved' %}
+                                            <small>Response: {{ object.review }}</small>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-2" align="right">
+                                        <button class="btn btn-sm btn-danger" title="button" data-toggle="collapse" data-target="#multiCollapseExample{{ object.id }}" aria-expanded="false" aria-controls="multiCollapseExample{{ object.id }}">
+                                            <i class="fa fa-sort"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="collapse multi-collapse" id="multiCollapseExample{{ object.id }}">
+                                <div class="row">
+                                    <div class="col">Reviewed {% if object.status == 'Resolved' %}{{ object.review_at }}{% else %}--{% endif %}</div>
+                                    <div class="col">Reviewed_by {% if object.status == 'Resolved' %}{{ object.review_by }}{% else %}--{% endif %}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tab-pane fade " id="leave" role="tabpanel" aria-labelledby="leave-tab">
+                    <div class="list-group">
+                        <div class="row">
+                            <div class="col-10">
+
+                            </div>
+                            <div class="col-2">
+                                <a href="{% url 'management:apply-leave' %}" class="btn btn-danger btn-block">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

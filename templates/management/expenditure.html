@@ -1,0 +1,133 @@
+{% extends 'layouts/admin_layout.html' %}
+{% block title %}
+    Expenditure
+{% endblock %}
+{% block page_title %}
+    Expenditure
+{% endblock %}
+{% block exp %}
+    active
+{% endblock %}
+{% block acc %}
+    active
+{% endblock %}
+{% block btn %}
+    <button  class="btn btn-sm btn-danger" data-toggle="modal" data-target="#medicineModal" type="submit">
+        <i class="fa fa-plus"></i> Procure Medicine
+    </button>
+    <div class="modal fade" id="medicineModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="medicineModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="medicineModal">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'management:medicine-add' %}" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col ">
+                                <div class="form-group">
+                                    <label for="id_name">Name</label>
+                                    <input required type="text" name="name" id="id_name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                            <div class="form-group">
+                                <label for="id_medicine_type">Category</label>
+                                <select required name="medicine_type" id="id_medicine_type" class="custom-select">
+                                    <option value="">---------</option>
+                                    <option value="Syrup">Syrup</option>
+                                    <option value="Capsule">Capsule</option>
+                                    <option value="Tablet">Tablet</option>
+                                </select>
+                            </div>
+                        </div>
+                             <div class="col">
+                            <div class="form-group">
+                                <label for="id_boxes_bought">Boxes Bought</label>
+                                <input required type="number" name="boxes_bought" id="id_boxes_bought" class="form-control">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="id_no_in_box">Unit Per Box</label>
+                                    <input required type="number" name="no_in_box" id="id_no_in_box" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="id_cost_price_per_box">Cost Price Per Box</label>
+                                    <input required type="number" name="cost_price_per_box" id="id_cost_price_per_box" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="id_selling_price_per_unit">Selling Price Per Uint</label>
+                                    <input required type="number" name="selling_price_per_unit" id="id_selling_price_per_unit" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="id_manufacturer">Manufacturer</label>
+                                    <input required type="text" name="manufacturer" id="id_manufacturer" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="id_manufacture_date">Manufactured Date</label>
+                                    <input required type="date" name="manufacture_date" class="form-control" id="id_manufacture_date">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="id_expiry_date">Expiry Date</label>
+                                    <input required type="date" class="form-control" id="id_expiry_date" name="expiry_date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="sumbit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Item</th>
+                        <th>Cost  (GHS)</th>
+                        <th>Date Admitted</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in expenditure_list %}
+                        <tr>
+                            <td>{{ object.category }}</td>
+                            <td>{{ object.item }}</td>
+                            <td>{{ object.cost }}</td>
+                            <td>{{ object.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

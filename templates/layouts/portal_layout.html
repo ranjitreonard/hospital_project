@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
 </head>
 
@@ -32,7 +33,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon">
-                <i class="fas fa-sitemap"></i>
+                <i class="fas fa-folder"></i>
             </div>
             <div class="sidebar-brand-text mx-3">Portal</div>
         </a>
@@ -53,8 +54,8 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {% block acc %}{% endblock %}">
             <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-credit-card"></i>
-                <span>Payment</span></a>
+                <i class="fas fa-fw fa-balance-scale"></i>
+                <span>Prescription</span></a>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
@@ -63,31 +64,14 @@
 
 
          <li class="nav-item {% block hr %}{% endblock %}">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-handshake"></i>
-                <span>Income</span></a>
+            <a class="nav-link" href="{% url 'portal:bills' %}">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Bills</span></a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
 
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {% block staff %}{% endblock %}">
-            <a class="nav-link" href="{% url 'management:staff' %}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>OPD Payment</span></a>
-        </li>
 
-        <hr class="sidebar-divider">
-
-        <!-- Nav Item - Charts -->
-         <li class="nav-item {% block mgt %}{% endblock %}">
-            <a class="nav-link" href="{% url 'management:wards' %}">
-                <i class="fas fa-fw fa-cogs"></i>
-                <span>Treatment</span></a>
-        </li>
-        <!-- Nav Item - Tables -->
 
 
         <!-- Divider -->
@@ -334,7 +318,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="{% url 'user:logout' %}">Logout</a>
             </div>
         </div>
     </div>
@@ -356,6 +340,11 @@
 <!-- Page level custom scripts -->
 <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
 <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
 {% block js %}{% endblock %}
 </body>
 

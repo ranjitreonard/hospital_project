@@ -18,4 +18,6 @@ urlpatterns = [
     path('wards/', Wards.as_view(), name='wards'),
     path('ward/<id>/', ward_details, name='ward-details'),
     path('ward/bed/allocate/<bed_id>/', allocate_bed, name='bed-allocate'),
+    path('patient/discharge/<id>/', DischargedPatient.as_view(), name='patient-discharge'),
+
 ]

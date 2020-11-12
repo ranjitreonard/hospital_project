@@ -2,6 +2,7 @@
 {% block page_title %}
     Management
 {% endblock %}
+{% load humanize %}
 {% block title %}
     Wards Management
 {% endblock %}
@@ -16,6 +17,7 @@
                 <li class="nav-item"><a href="#bed" data-toggle="tab" role="tab" aria-controls="bed" aria-selected="false" class="nav-link " id="bed-tab">Beds</a></li>
                 <li class="nav-item"><a href="#patient" data-toggle="tab" role="tab" aria-controls="patient" aria-selected="false" class="nav-link " id="patient-tab">Patient</a></li>
                 <li class="nav-item"><a href="#bill" data-toggle="tab" role="tab" aria-controls="bill" aria-selected="false" class="nav-link " id="bill-tab">Bill Charges</a></li>
+                <li class="nav-item"><a href="#request" data-toggle="tab" role="tab" aria-controls="request" aria-selected="false" class="nav-link " id="request_tab">Request</a></li>
             </ul>
         </div>
         <div class="card-body">
@@ -39,16 +41,62 @@
                                         </a>
                                     </div>
                                 </div>
-
                             </div>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="tab-pane fade " id="bed" role="tabpanel" aria-labelledby="bed-tab">
-                    List of beds
+                    <div class="list-group">
+                        <div class="row">
+                            {% for bed in beds %}
+                                <div class="col-4 mb-2">
+                                    <div class="list-group-item list-group-item-column align-items-start">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1"> {{ bed.ward }}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 mt-auto"># {{ bed.number }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade " id="patient" role="tabpanel" aria-labelledby="patient-tab">
-                    List of patients
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Full name</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for n in patients %}
+                                <tr>
+                                    <td>{{ n.patient_id }}</td>
+                                    <td>{{ n.full_name }}</td>
+                                    <td>{{ n.gender }}</td>
+                                    <td>{{ n.date_of_birth }}</td>
+                                    {#                            <td>#}
+                                    {#                                <a href="{% url 'department:patient-details' object.id%}" class="btn btn-info">#}
+                                    {#                                    <i class="fas fa-list"></i>#}
+                                    {#                                </a>#}
+                                    {#                            </td>#}
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                    </div>
                 </div>
                 <div class="tab-pane fade " id="bill" role="tabpanel" aria-labelledby="bill-tab">
                     <div class="table-responsive">
@@ -91,6 +139,7 @@
                                                                     <option value="LB" {% if bill.bill_type == 'LB' %}selected{% endif %}>Lab Bills</option>
                                                                     <option value="PB" {% if bill.bill_type == 'PB' %}selected{% endif %}>Procedure Bills</option>
                                                                     <option value="CB" {% if bill.bill_type == 'CB' %}selected{% endif %}>Card Bills</option>
+                                                                    <option value="CnB" {% if bill.bill_type == 'CnB' %}selected{% endif %}>Consultation Bills</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
@@ -122,6 +171,20 @@
                         </table>
                     </div>
                 </div>
+                <div class="tab-pane fade " id="request" role="tabpanel" aria-labelledby="request-tab">
+                    <div class="list-group-flush">
+                        {% for request in requests %}
+                        <div class="list-group-item {% if request.status == 0 %} border-left-primary{% elif request.status == 1 %}border-left-primary{% else %} border-left-danger{% endif %} list-group-item-action-flex-column align-item-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ request.department }}</h5>
+                                <small>{{ request.created_at | ordinal }}</small>
+
+                            </div>
+                            <p>{{ request.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -133,6 +196,8 @@
         </button>
         <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#billModal">
             <i class="fa fa-plus"></i>Add Bill
+        </button> <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#requestModal">
+            <i class="fa fa-plus"></i>Make Request
         </button>
 
     </div>
@@ -153,9 +218,10 @@
                             <select required name="bill_type" id="id_bill_type" class="custom-select">
                                 <option value="">---------</option>
                                 <option value="WB">Ward Bills</option>
-                                <option value="LB">Lab Bills</option>
+                                <option value="LB">Laboratory Bills</option>
                                 <option value="PB">Procedure Bills</option>
                                 <option value="CB">Card Bills</option>
+                                <option value="CnB">Consultation Bills</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -195,13 +261,48 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="requestModalLabel">Make Request</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'management:request-add' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_bill_type">Department</label>
+                            <select required name="department" id="id_department" class="custom-select">
+                                <option value="">---------</option>
+                                <option value="Ward">Ward</option>
+                                <option value="Pharmacy">Pharmacy</option>
+                                <option value="Account">Account</option>
+                                <option value="Management">Management</option>
+                                <option value="HR">Human Resource</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_description">Description</label>
+                            <textarea class="form-control" name="description" id="id_description" cols="30" rows="3" placeholder="Enter details of your request"></textarea>
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-sm btn-block btn-warning">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block js %}
     <script>
+    {# This js is for bill type field to determine whether service field should show or not #}
         $(document).ready(function() {
             $('#id_bill_type').change(function () {
                 var val = $(this).val();
-                if(val === 'WB' || val === 'CB'){
+                if(val === 'WB' || val === 'CB' || val == 'CnB'){
                     $("#id_service").hide();
                     $("#id_service").prop('value', '')
                 }else if (val === "LB" || val === "PB"){
@@ -214,9 +315,9 @@
         if(document.getElementById('id_ebill_type') === 'WB' || document.getElementById('id_ebill_type') === 'CB'){
             $("#id_eservice").hide();
         }else if(document.getElementById('id_ebill_type') === 'LB' || document.getElementById('id_ebill_type') === 'PB'){
-             $("#id_eservice").show();
+            $("#id_eservice").show();
         }
-         $(document).ready(function() {
+        $(document).ready(function() {
             $('#id_ebill_type').change(function () {
                 var val = $(this).val();
                 if(val === 'WB' || val === 'CB'){
